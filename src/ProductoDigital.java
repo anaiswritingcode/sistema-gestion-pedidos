@@ -1,3 +1,25 @@
 public class ProductoDigital extends Producto {
+  private double tamannoDescarga;
+  private String licencia;
+  private double iva;
+  private double descuento;
   // En proceso.
+
+  // * Constructor:
+
+  public ProductoDigital(String nombre, double precio, double tamannoDescarga, String licencia) {
+    super(nombre, precio);
+    this.tamannoDescarga = tamannoDescarga;
+    this.licencia = licencia;
+    this.iva = 0; // Inicializado a 0 por defecto para evitar errores.
+    this.descuento = 0; // Inicializado a 0 por la misma razón.
+    // En proceso.
+  }
+
+  // * Otros métodos:
+
+  @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoDigital.
+  public double calcularPrecioFinal() {
+    return getPrecio() * (1 + iva) * (1 - descuento);
+  }
 }
