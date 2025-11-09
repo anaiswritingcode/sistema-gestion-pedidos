@@ -37,10 +37,10 @@ public class Pedido {
   }
 
   public void mostrarResumen() {
-    System.out.println("Productos:");
+    System.out.println("\nProductos:");
     for (Producto producto : productos) {
-      System.out.println("- " + producto.getNombre() + ", precio final: " + producto.calcularPrecioFinal() + "€."); // Imprime una lista con los productos.
+      System.out.println("- " + producto.getNombre() + ", precio final: " + producto.calcularPrecioFinal() + " euros."); // Imprime una lista con los productos.
     }
-    System.out.println("Total: " + calcularTotal() + "€.");
+    System.out.println("\nTotal: " + calcularTotal() + " euros.");
   }
 }
