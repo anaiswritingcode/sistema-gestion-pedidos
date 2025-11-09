@@ -16,6 +16,26 @@ public class ProductoDigital extends Producto {
     // En proceso.
   }
 
+  // * Getters:
+
+  public double getTamannoDescarga() {
+    return tamannoDescarga;
+  }
+
+  public String getLicencia() {
+    return licencia;
+  }
+
+  // * Setters:
+
+  public void setIva(double iva) {
+    this.iva = iva;
+  }
+
+  public void setDescuento(double descuento) {
+    this.descuento = descuento;
+  }
+
   // * Otros métodos:
 
   @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoDigital.
