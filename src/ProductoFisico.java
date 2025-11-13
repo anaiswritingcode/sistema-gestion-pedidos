@@ -10,6 +10,14 @@ public class ProductoFisico extends Producto {
     // En proceso.
   }
 
+  // * Getters:
+
+  // getNombre() y getPrecio() ya los implementa la superclase Producto y son accesibles desde la subclase ProductoFisico.
+
+  public double getCosteEnvio() {
+    return costeEnvio;
+  }
+
   // * Otros métodos:
 
   @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoFisico.
