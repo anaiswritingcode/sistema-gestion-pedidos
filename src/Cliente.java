@@ -36,8 +36,12 @@ public class Cliente {
 
   // * Setters:
 
-  public void setDireccion(String direccion) {
+  public void setDireccion(String direccion) { // Para añadir direcciones de las que elegir.
     direcciones.add(direccion);
+  }
+
+  public void setCorreo(String correo) { // Para asignar un nuevo correo.
+    this.correo = correo;
   }
 
   // * Otros métodos:
