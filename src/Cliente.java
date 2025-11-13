@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Cliente {
   private int idCliente;
+  private static int contadorId = 0;
   private String nombreCompleto;
   private List<String> direcciones = new ArrayList<>();
   private String correo;
@@ -9,8 +10,9 @@ public class Cliente {
 
   // * Constructor:
 
-  public Cliente(int idCliente, String nombreCompleto, String correo) {
-    this.idCliente = idCliente;
+  public Cliente(String nombreCompleto, String correo) {
+    contadorId++;
+    idCliente = contadorId;
     this.nombreCompleto = nombreCompleto;
     this.correo = correo;
     // En proceso.
