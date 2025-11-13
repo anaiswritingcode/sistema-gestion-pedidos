@@ -1,5 +1,5 @@
 public class Main {
   public static void main(String[] args) throws Exception {
-    // En proceso.
+    // TODO: Añadir funcionalidad de interactividad por la terminal.
   }
 }
