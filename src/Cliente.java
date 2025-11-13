@@ -18,8 +18,20 @@ public class Cliente {
 
   // * Getters:
 
+  public int getIdCliente() {
+    return idCliente;
+  }
+
+  public String getNombreCompleto() {
+    return nombreCompleto;
+  }
+
   public List<String> getDirecciones() {
     return direcciones;
+  }
+
+  public String getCorreo() {
+    return correo;
   }
 
   // * Setters:
