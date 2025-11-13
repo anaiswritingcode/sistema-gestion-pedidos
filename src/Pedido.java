@@ -26,6 +26,24 @@ public class Pedido {
     // En proceso.
   }
 
+  // * Getters:
+
+  public int getIdPedido() {
+    return idPedido;
+  }
+
+  public String getCliente() {
+    return cliente.getNombreCompleto();
+  }
+
+  public String getProductos() {
+    for (Producto producto : productos) {
+      return producto.getNombre();
+    }
+    
+    return null;
+  }
+
   // * Otros métodos:
 
   public void agregarProducto(Producto producto) {
