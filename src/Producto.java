@@ -1,17 +1,23 @@
 public class Producto {
+  private int idProducto;
+  private static int contadorId = 0;
   private String nombre;
   private double precio;
-  // En proceso.
 
   // * Constructor:
 
   public Producto(String nombre, double precio) {
+    contadorId++;
+    idProducto = contadorId;
     this.nombre = nombre;
     this.precio = precio;
-    // En proceso.
   }
 
   // * Getters:
+
+  public int getIdProducto() {
+    return idProducto;
+  }
 
   public String getNombre() {
     return nombre;
