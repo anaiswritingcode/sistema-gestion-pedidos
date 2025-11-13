@@ -36,12 +36,15 @@ public class Pedido {
     return cliente.getNombreCompleto();
   }
 
-  public String getProductos() {
+  public String[] getProductos() {
+    String[] nombreProductos = new String[productos.size()];
+    int contadorProducto = 0;
+
     for (Producto producto : productos) {
-      return producto.getNombre();
+      nombreProductos[contadorProducto++] = producto.getNombre();
     }
-    
-    return null;
+
+    return nombreProductos;
   }
 
   // * Otros métodos:
