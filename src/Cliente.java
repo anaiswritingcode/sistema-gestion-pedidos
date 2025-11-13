@@ -6,7 +6,6 @@ public class Cliente {
   private String nombreCompleto;
   private List<String> direcciones = new ArrayList<>();
   private String correo;
-  // En proceso.
 
   // * Constructor:
 
@@ -15,7 +14,6 @@ public class Cliente {
     idCliente = contadorId;
     this.nombreCompleto = nombreCompleto;
     this.correo = correo;
-    // En proceso.
   }
 
   // * Getters:
@@ -28,8 +26,13 @@ public class Cliente {
     return nombreCompleto;
   }
 
-  public List<String> getDirecciones() {
-    return direcciones;
+  public String[] getDirecciones() {
+    String[] nombreDirecciones = new String[direcciones.size()];
+    int contadorDirecciones = 0;
+    for (String direccion : direcciones) {
+      nombreDirecciones[contadorDirecciones++] = direccion;
+    }
+    return nombreDirecciones;
   }
 
   public String getCorreo() {
