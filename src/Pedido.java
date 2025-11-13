@@ -1,20 +1,10 @@
 import java.util.*;
 
 public class Pedido {
-  /* Notas: 
-  - Para establecer la relación de asociación con
-  Cliente, úsalo como atributo en vez de un ArrayList; 
-  un pedido solo le pertenece a un cliente en este caso.
-  - Para establecer la relación de agregación con Producto,
-  usa un ArrayList; los productos existen por sí mismos y
-  un pedido puede contener varios. 
-  */
-
   private int idPedido;
   private static int contadorId = 0;
   private Cliente cliente;
   private List<Producto> productos = new ArrayList<>();
-  // En proceso.
 
   // * Constructor:
 
@@ -23,7 +13,6 @@ public class Pedido {
     idPedido = contadorId;
     this.cliente = cliente;
     this.productos = new ArrayList<>();
-    // En proceso.
   }
 
   // * Getters:
@@ -39,7 +28,7 @@ public class Pedido {
   public String[] getProductos() {
     String[] nombreProductos = new String[productos.size()];
     int contadorProducto = 0;
-    for (Producto producto : productos) {
+    for (Producto producto : productos) { // Para ir metiendo los nombres de cada producto introducido en la lista dentro de un array. 
       nombreProductos[contadorProducto++] = producto.getNombre();
     }
     return nombreProductos;
@@ -53,7 +42,7 @@ public class Pedido {
 
   public double calcularTotal() {
     double total = 0;
-    for (Producto producto : productos) {
+    for (Producto producto : productos) { // Para añadir el precio final de cada producto introducido en la lista.
       total += producto.calcularPrecioFinal();
     }
     return total;
@@ -61,8 +50,8 @@ public class Pedido {
 
   public void mostrarResumen() {
     System.out.println("\nProductos:");
-    for (Producto producto : productos) {
-      System.out.println("- " + producto.getNombre() + ", precio final: " + producto.calcularPrecioFinal() + " euros."); // Imprime una lista con los productos.
+    for (Producto producto : productos) { // Para imprimir cada producto introducido en la lista.
+      System.out.println("- " + producto.getNombre() + ", precio final: " + producto.calcularPrecioFinal() + " euros.");
     }
     System.out.println("\nTotal: " + calcularTotal() + " euros.");
   }

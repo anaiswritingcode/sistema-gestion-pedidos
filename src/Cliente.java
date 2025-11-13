@@ -29,7 +29,7 @@ public class Cliente {
   public String[] getDirecciones() {
     String[] nombreDirecciones = new String[direcciones.size()];
     int contadorDirecciones = 0;
-    for (String direccion : direcciones) {
+    for (String direccion : direcciones) { // Para ir metiendo cada direccion introducida en la lista dentro de un array. 
       nombreDirecciones[contadorDirecciones++] = direccion;
     }
     return nombreDirecciones;
@@ -54,6 +54,5 @@ public class Cliente {
   @Override // Sobreescribe el método toString() propio de objetos en Java.
   public String toString() {
     return "\nCliente: " + nombreCompleto + ", correo: " + correo + ", ID: " + idCliente + ".";
-    // En proceso.
   }
 }

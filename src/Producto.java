@@ -32,7 +32,6 @@ public class Producto {
   @Override // Sobreescribe el método toString() propio de objetos en Java.
   public String toString() {
     return "\nProducto: " + nombre + ", precio: " + precio + ".";
-    // En proceso.
   }
 
   public double calcularPrecioFinal() {

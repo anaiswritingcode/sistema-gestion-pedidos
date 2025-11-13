@@ -3,7 +3,6 @@ public class ProductoDigital extends Producto {
   private String licencia;
   private double iva;
   private double descuento;
-  // En proceso.
 
   // * Constructor:
 
@@ -13,7 +12,6 @@ public class ProductoDigital extends Producto {
     this.licencia = licencia;
     this.iva = 0; // Inicializado a 0 por defecto para evitar errores.
     this.descuento = 0; // Inicializado a 0 por la misma razón.
-    // En proceso.
   }
 
   // * Getters:
@@ -42,6 +40,6 @@ public class ProductoDigital extends Producto {
 
   @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoDigital.
   public double calcularPrecioFinal() {
-    return getPrecio() * (1 + iva) * (1 - descuento);
+    return getPrecio() * (1 + iva) * (1 - descuento); // Para calcular el precio final del producto teniendo en cuenta el IVA y los descuentos.
   }
 }
