@@ -18,6 +18,8 @@ public class ProductoDigital extends Producto {
 
   // * Getters:
 
+  // getNombre() y getPrecio() ya los implementa la superclase Producto y son accesibles desde la subclase ProductoDigital.
+
   public double getTamannoDescarga() {
     return tamannoDescarga;
   }
