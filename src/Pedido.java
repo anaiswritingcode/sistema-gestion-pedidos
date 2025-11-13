@@ -39,11 +39,9 @@ public class Pedido {
   public String[] getProductos() {
     String[] nombreProductos = new String[productos.size()];
     int contadorProducto = 0;
-
     for (Producto producto : productos) {
       nombreProductos[contadorProducto++] = producto.getNombre();
     }
-
     return nombreProductos;
   }
 
