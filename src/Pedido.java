@@ -10,6 +10,8 @@ public class Pedido {
   un pedido puede contener varios. 
   */
 
+  private int idPedido;
+  private static int contadorId = 0;
   private Cliente cliente;
   private List<Producto> productos = new ArrayList<>();
   // En proceso.
@@ -17,6 +19,8 @@ public class Pedido {
   // * Constructor:
 
   public Pedido(Cliente cliente) {
+    contadorId++;
+    idPedido = contadorId;
     this.cliente = cliente;
     this.productos = new ArrayList<>();
     // En proceso.
