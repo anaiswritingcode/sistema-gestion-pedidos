@@ -13,7 +13,7 @@ public class Main {
 
     System.out.println("\n-- Sistema de gestión de productos --");
 
-    System.out.println("\nEliga una de las siguientes opciones:");
+    System.out.println("\nElija una de las siguientes opciones:");
     System.out.println(" 1) Añadir cliente.");
     System.out.println(" 2) Añadir producto.");
 
