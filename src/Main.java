@@ -5,7 +5,6 @@ public class Main {
     int respuestaMenu = 0;
     String nombreCliente = "";
     String correoCliente = "";
-    int numCliente = 0;
     List<Cliente> listaClientes = new ArrayList<>();
 
     Scanner scan = new Scanner(System.in);
