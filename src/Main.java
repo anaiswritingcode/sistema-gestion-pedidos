@@ -55,14 +55,26 @@ public class Main {
       System.out.print("- Nombre del producto: ");
       nombreProducto = scan.nextLine();
 
-      System.out.print("- Precio del producto: ");
-      precioProducto = scan.nextDouble(); // TODO: Verificar que no sea negativo.
-      scan.nextLine(); // Limpiar buffer.
+      do {
+        System.out.print("- Precio del producto: ");
+        precioProducto = scan.nextDouble();
+        scan.nextLine(); // Limpiar buffer.
+
+        if (precioProducto < 0) {
+          System.out.println("\nEntrada de datos no válida. Introduce un número positivo.\n");
+        }
+      } while (precioProducto < 0);
 
       if (tipoProducto.equalsIgnoreCase("digital")) { // Pedir atributos específicos de los productos digitales.
-        System.out.print("- Tamaño de descarga (en MB): ");
-        tamannoDescargaProducto = scan.nextDouble(); // TODO: Verificar que no sea negativo.
-        scan.nextLine(); // Limpiar buffer.
+        do {
+          System.out.print("- Tamaño de descarga (en MB): ");
+          tamannoDescargaProducto = scan.nextDouble();
+          scan.nextLine(); // Limpiar buffer.
+        
+          if (tamannoDescargaProducto < 0) {
+            System.out.println("\nEntrada de datos no válida. Introduce un número positivo.\n");
+          }
+        } while (tamannoDescargaProducto < 0);
 
         System.out.print("- Licencia: ");
         licenciaProducto = scan.nextLine();
@@ -71,8 +83,14 @@ public class Main {
       }
       
       if (tipoProducto.equalsIgnoreCase("fisico")) { // Pedir atributos específicos de los productos físicos.
-        System.out.print("- Coste de envío: ");
-        costeEnvioProducto = scan.nextDouble(); // TODO: Verificar que no sea negativo.
+        do {
+          System.out.print("- Coste de envío: ");
+          costeEnvioProducto = scan.nextDouble();
+        
+          if (costeEnvioProducto < 0) {
+            System.out.println("\nEntrada de datos no válida. Introduce un número positivo.\n");
+          }
+        } while (costeEnvioProducto < 0);
 
         listaProductos.add(new ProductoFisico(nombreProducto, precioProducto, costeEnvioProducto));
       }
