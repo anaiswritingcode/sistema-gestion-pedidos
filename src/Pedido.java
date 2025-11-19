@@ -12,7 +12,6 @@ public class Pedido {
     contadorId++;
     idPedido = contadorId;
     this.cliente = cliente;
-    this.productos = new ArrayList<>();
   }
 
   // * Getters:
