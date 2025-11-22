@@ -135,6 +135,34 @@ public class Main {
       }
     }
 
+    // * Mostrar resumen del pedido:
+
+    do {
+      do { // Elegir resumen y revisar el input.
+        System.out.print("\n¿De qué pedido desea ver el resumen? Introduce su número: ");
+        codigoPedido = scan.nextInt();
+        
+        if (codigoPedido < 1 || codigoPedido > listaPedidos.size()) {
+          System.out.println("\nEntrada de datos no válida. Introduce un número positivo y dentro del rango total de pedidos.");
+        } else {
+          listaPedidos.get(codigoPedido - 1).mostrarResumen();
+        }
+      } while (codigoPedido < 1 || codigoPedido > listaPedidos.size());
+
+      do { // Elegir si ver más resúmenes y revisar el input.
+        System.out.print("\n¿Quiere ver el resumen de otro pedido? (si, no) ");
+        respuestaResumen = scan.next();
+        
+        if (!respuestaResumen.equalsIgnoreCase("si") && !respuestaResumen.equalsIgnoreCase("no")) {
+          System.out.println("\nOpción no valida. Escriba 'si' o 'no' (sin tilde).");
+        } else {
+          if (respuestaResumen.equalsIgnoreCase("no")) {
+            verResumen = false;
+          }
+        }
+      } while (!respuestaResumen.equalsIgnoreCase("si") && !respuestaResumen.equalsIgnoreCase("no"));
+    } while (verResumen);
+
     scan.close();
   }
 }
