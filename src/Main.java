@@ -7,6 +7,7 @@ public class Main {
     String nombreCliente = "";
     String correoCliente = "";
     int codigoCliente = 0;
+    List<Cliente> listaClientes = new ArrayList<>();
 
     int numProductos = 0;
     String tipoProducto = "";
@@ -19,8 +20,6 @@ public class Main {
     double descuentoProducto = 0;
     boolean esPrimerProducto = true;
     int codigoProducto = 0;
-
-    List<Cliente> listaClientes = new ArrayList<>();
     List<Producto> listaProductos = new ArrayList<>();
 
     int codigoPedido = 0;
@@ -101,6 +100,29 @@ public class Main {
         licenciaProducto = scan.nextLine();
 
         listaProductos.add(new ProductoDigital(nombreProducto, precioProducto, tamannoDescargaProducto, licenciaProducto));
+
+        do { // Poner IVA y revisar el input.
+          System.out.print(" - IVA del producto " + (i+1) + " (en decimales): ");
+          ivaProducto = scan.nextDouble();
+          
+          if (ivaProducto < 0) {
+            System.out.println("\nEntrada de datos no válida. Introduce un número positivo.\n");
+          } else {
+            ((ProductoDigital) listaProductos.get(i)).setIva(ivaProducto);
+          }
+        } while (ivaProducto < 0);
+        
+        do { // Poner descuento y revisar el input.
+          System.out.print(" - Descuento al producto " + (i+1) + " (en decimales): ");
+          descuentoProducto = scan.nextDouble();
+          scan.nextLine(); // Limpiar buffer.
+          
+          if (descuentoProducto < 0) {
+            System.out.println("\nEntrada de datos no válida. Introduce un número positivo.\n");
+          } else {
+            ((ProductoDigital) listaProductos.get(i)).setDescuento(descuentoProducto);
+          }
+        } while (descuentoProducto < 0);
       }
       
       if (tipoProducto.equalsIgnoreCase("fisico")) { // Pedir atributos específicos de los productos físicos.
