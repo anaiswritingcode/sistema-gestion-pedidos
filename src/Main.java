@@ -15,10 +15,17 @@ public class Main {
     double tamannoDescargaProducto = 0;
     String licenciaProducto = "";
     double costeEnvioProducto = 0;
+    double ivaProducto = 0;
+    double descuentoProducto = 0;
+    boolean esPrimerProducto = true;
     int codigoProducto = 0;
 
     List<Cliente> listaClientes = new ArrayList<>();
     List<Producto> listaProductos = new ArrayList<>();
+
+    int codigoPedido = 0;
+    String respuestaResumen = "";
+    boolean verResumen = true;
     List<Pedido> listaPedidos = new ArrayList<>();
 
     Scanner scan = new Scanner(System.in);
@@ -50,12 +57,19 @@ public class Main {
     scan.nextLine(); // Limpiar buffer.
 
     for (int i = 0; i < numProductos; i++) { // Por cada producto.
-      do { // Elegir tipo de producto.
-        System.out.print("\n¿Qué tipo de producto desea añadir? (digital, fisico) ");
+      do { // Elegir tipo de producto y revisar el input.
+        if (esPrimerProducto) {
+          System.out.print("\n¿Qué tipo de producto desea añadir? (digital, fisico) ");
         tipoProducto = scan.nextLine();
-
+        } else {
+          System.out.print("\n¿Qué otro tipo de producto desea añadir? (digital, fisico) ");
+          tipoProducto = scan.nextLine();
+        }
+        
         if (!tipoProducto.equalsIgnoreCase("digital") && !tipoProducto.equalsIgnoreCase("fisico")) {
           System.out.println("\nOpción no valida. Escriba 'digital' o 'fisico' (sin tilde).");
+        } else {
+          esPrimerProducto = false;
         }
       } while (!tipoProducto.equalsIgnoreCase("digital") && !tipoProducto.equalsIgnoreCase("fisico"));
 
@@ -121,13 +135,22 @@ public class Main {
       System.out.print("\n¿Cuántos productos quiere meter en el pedido " + (i+1) + "? ");
       numProductos = scan.nextInt();
 
+      esPrimerProducto = true; // Reseteamos la variable para la próxima comprobación.
+
       for (int j = 0; j < numProductos; j++) { // Por cada producto.
         do { // Añadir producto y revisar el input.
-          System.out.print(" " + (j + 1) + ") ¿Qué producto desea agregar al pedido " + (i+1) + "? Introduce su número: ");
-          codigoProducto = scan.nextInt();
+          if (esPrimerProducto) {
+            System.out.print(" " + (j + 1) + ") ¿Qué producto desea agregar al pedido " + (i+1) + "? Introduce su número: ");
+            codigoProducto = scan.nextInt();
+          } else {
+            System.out.print(" " + (j + 1) + ") ¿Qué otro producto desea agregar al pedido " + (i+1) + "? Introduce su número: ");
+            codigoProducto = scan.nextInt();
+          }
         
           if (codigoProducto < 1 || codigoProducto > listaProductos.size()) {
             System.out.println("\nEntrada de datos no válida. Introduce un número positivo y dentro del rango total de productos.");
+          } else {
+            esPrimerProducto = false;
           }
         } while (codigoProducto < 1 || codigoProducto > listaProductos.size());
 
