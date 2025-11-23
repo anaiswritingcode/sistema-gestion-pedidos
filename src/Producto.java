@@ -1,4 +1,4 @@
-public class Producto {
+public abstract class Producto {
   private int idProducto;
   private static int contadorId = 0;
   private String nombre;
