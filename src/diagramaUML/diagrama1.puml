@@ -43,7 +43,7 @@ class Pedido {
   +mostrarResumen(): void
 }
 
-class Producto {
+abstract class Producto {
   -idProducto: int
   -{static} contadorId: int = 0
   -nombre: String
