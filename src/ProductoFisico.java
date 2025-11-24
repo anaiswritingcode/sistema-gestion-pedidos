@@ -20,6 +20,7 @@ public class ProductoFisico extends Producto {
 
   @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoFisico.
   public double calcularPrecioFinal() {
-    return getPrecio() + costeEnvio; // Para calcular el precio final del producto teniendo en cuenta el coste de envío.
+    double precio = getPrecio() + costeEnvio; // Para calcular el precio final del producto teniendo en cuenta el coste de envío.
+    return Math.round(precio * 100.0) / 100.0; // Para redondear a dos decimales.
   }
 }

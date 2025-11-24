@@ -40,6 +40,7 @@ public class ProductoDigital extends Producto {
 
   @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con atributos específicos de ProductoDigital.
   public double calcularPrecioFinal() {
-    return getPrecio() * (1 + iva) * (1 - descuento); // Para calcular el precio final del producto teniendo en cuenta el IVA y los descuentos.
+    double precio = getPrecio() * (1 + iva) * (1 - descuento); // Para calcular el precio final del producto teniendo en cuenta el IVA y los descuentos.
+    return Math.round(precio * 100.0) / 100.0; // Para redondear a dos decimales.
   }
 }
