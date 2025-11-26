@@ -57,7 +57,7 @@ class ProductoFisico {
 }
 
 Pedido -- Cliente
-Pedido --o Producto
+Pedido o-- Producto
 ProductoDigital --|> Producto
 ProductoFisico --|> Producto
 @enduml
