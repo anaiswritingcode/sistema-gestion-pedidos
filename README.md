@@ -12,4 +12,7 @@ En este proyecto se usarán **diagramas UML** y **programación orientada a obje
 
 ## Instrucciones de ejecución
 
-(En proceso.)
+1. Clone el repositorio con el link correspondiente: https://github.com/anaiswritingcode/sistema-gestion-pedidos.git
+2. Abra el repositorio clonado en un IDE que permita ejecutar proyectos Java.
+3. Entre en la carpeta `src`, busque el archivo `Main.java` y ejecútelo.
+4. Interactúe con el programa desde la terminal.
