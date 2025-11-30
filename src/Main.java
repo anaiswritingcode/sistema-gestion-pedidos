@@ -31,13 +31,19 @@ public class Main {
 
     // * Menú de preguntas:
 
-    System.out.println("\n-- Sistema de gestión de productos --");
+    System.out.println("\n-- Sistema de gestión de productos --\n");
 
     // * Añadir cliente:
 
-    System.out.print("\n¿Cuántos clientes va a añadir? ");
-    numClientes = scan.nextInt();
-    scan.nextLine(); // Limpiar buffer.
+    do { // Poner número de clientes y revisar el input.
+      System.out.print("¿Cuántos clientes va a añadir? ");
+      numClientes = scan.nextInt();
+      scan.nextLine(); // Limpiar buffer.
+
+      if (numClientes <= 0) {
+        System.out.println("\nEntrada de datos no válida. Introduce un número positivo y mayor que cero.\n");
+      }
+    } while (numClientes <= 0);
 
     for (int i = 0; i < numClientes; i++) { // Por cada cliente.
       System.out.print("\n¿Cuál es el nombre completo del cliente " + (i + 1) + "? ");
@@ -51,9 +57,15 @@ public class Main {
 
     // * Añadir producto:
 
-    System.out.print("\n¿Cuántos productos va a añadir? ");
-    numProductos = scan.nextInt();
-    scan.nextLine(); // Limpiar buffer.
+    do { // Poner número de productos y revisar el input.
+      System.out.print("\n¿Cuántos productos va a añadir? ");
+      numProductos = scan.nextInt();
+      scan.nextLine(); // Limpiar buffer.
+
+      if (numProductos <= 0) {
+        System.out.println("\nEntrada de datos no válida. Introduce un número positivo y mayor que cero.");
+      }
+    } while (numProductos <= 0);
 
     for (int i = 0; i < numProductos; i++) { // Por cada producto.
       do { // Elegir tipo de producto y revisar el input.
@@ -156,8 +168,14 @@ public class Main {
 
       listaPedidos.add(new Pedido(listaClientes.get(codigoCliente - 1)));
 
-      System.out.print("\n¿Cuántos productos quiere meter en el pedido " + (i + 1) + "? ");
-      numProductos = scan.nextInt();
+      do { // Poner número de productos y revisar el input.
+        System.out.print("\n¿Cuántos productos quiere meter en el pedido " + (i + 1) + "? ");
+        numProductos = scan.nextInt();
+
+        if (numProductos <= 0) {
+          System.out.println("\nEntrada de datos no válida. Introduce un número positivo y mayor que cero.");
+        }
+      } while (numProductos <= 0);
 
       esPrimerProducto = true; // Reseteamos la variable para la próxima comprobación.
 
@@ -175,7 +193,7 @@ public class Main {
 
           if (codigoProducto < 1 || codigoProducto > listaProductos.size()) {
             System.out.println(
-                "\nEntrada de datos no válida. Introduce un número positivo y dentro del rango total de productos.");
+                "\nEntrada de datos no válida. Introduce un número positivo y dentro del rango total de productos.\n");
           } else {
             esPrimerProducto = false;
           }
