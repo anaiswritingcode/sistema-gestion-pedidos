@@ -1,4 +1,7 @@
-import java.util.*;
+package com.sgp.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
   private int idCliente;
@@ -29,7 +32,8 @@ public class Cliente {
   public String[] getDirecciones() {
     String[] nombreDirecciones = new String[direcciones.size()];
     int contadorDirecciones = 0;
-    for (String direccion : direcciones) { // Para ir metiendo cada direccion introducida en la lista dentro de un array. 
+    for (String direccion : direcciones) { // Para ir metiendo cada direccion introducida en la lista dentro de un
+                                           // array.
       nombreDirecciones[contadorDirecciones++] = direccion;
     }
     return nombreDirecciones;

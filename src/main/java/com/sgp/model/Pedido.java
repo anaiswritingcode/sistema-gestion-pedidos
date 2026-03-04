@@ -1,4 +1,9 @@
-import java.util.*;
+package com.sgp.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sgp.producto.Producto;
 
 public class Pedido {
   private int idPedido;
@@ -27,7 +32,8 @@ public class Pedido {
   public String[] getProductos() {
     String[] nombreProductos = new String[productos.size()];
     int contadorProducto = 0;
-    for (Producto producto : productos) { // Para ir metiendo los nombres de cada producto introducido en la lista dentro de un array. 
+    for (Producto producto : productos) { // Para ir metiendo los nombres de cada producto introducido en la lista
+                                          // dentro de un array.
       nombreProductos[contadorProducto++] = producto.getNombre();
     }
     return nombreProductos;

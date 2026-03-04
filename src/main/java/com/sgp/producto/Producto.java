@@ -1,3 +1,5 @@
+package com.sgp.producto;
+
 public abstract class Producto {
   private int idProducto;
   private static int contadorId = 0;
@@ -35,6 +37,7 @@ public abstract class Producto {
   }
 
   public double calcularPrecioFinal() {
-    return precio; // Aquí simplemente devuelve 'precio', se sobreescribe en las subclases 'ProductoFisico' y 'ProductoDigital' según sus atributos específicos.
+    return precio; // Aquí simplemente devuelve 'precio', se sobreescribe en las subclases
+                   // 'ProductoFisico' y 'ProductoDigital' según sus atributos específicos.
   }
 }
