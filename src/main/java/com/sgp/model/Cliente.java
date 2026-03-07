@@ -88,6 +88,9 @@ public class Cliente {
    * @param direccion Dirección a eliminar
    */
   public void eliminarDireccion(String direccion) {
+    if (direccion == null || direccion.isEmpty() || !direcciones.contains(direccion)) {
+      throw new IllegalArgumentException("La dirección no existe.");
+    }
     direcciones.remove(direccion);
   }
 
