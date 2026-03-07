@@ -6,17 +6,31 @@ import java.util.List;
 import com.sgp.producto.Producto;
 
 public class Pedido {
-  private int idPedido;
-  private static int contadorId = 0;
-  private Cliente cliente;
-  private List<Producto> productos = new ArrayList<>();
+  private static int contadorId = 0; // 'static' para que se comparta entre instancias.
+  private final int idPedido;
+  private final Cliente cliente;
+  private final List<Producto> productos;
 
   // * Constructor:
 
+  /**
+   * Construcción base para los pedidos
+   * 
+   * @param cliente Cliente al que le pertenece el pedido
+   */
   public Pedido(Cliente cliente) {
-    contadorId++;
-    idPedido = contadorId;
+
+    // Validación interna de 'cliente':
+
+    if (cliente == null) {
+      throw new IllegalArgumentException("El cliente no puede ser null.");
+    }
+
+    // Asignación de variables:
+
+    this.idPedido = contadorId++;
     this.cliente = cliente;
+    this.productos = new ArrayList<>();
   }
 
   // * Getters:
@@ -25,39 +39,84 @@ public class Pedido {
     return idPedido;
   }
 
-  public String getCliente() {
-    return cliente.getNombreCompleto();
+  public Cliente getCliente() {
+    return cliente;
   }
 
-  public String[] getProductos() {
-    String[] nombreProductos = new String[productos.size()];
-    int contadorProducto = 0;
-    for (Producto producto : productos) { // Para ir metiendo los nombres de cada producto introducido en la lista
-                                          // dentro de un array.
-      nombreProductos[contadorProducto++] = producto.getNombre();
-    }
-    return nombreProductos;
+  public List<Producto> getProductos() {
+    return new ArrayList<>(productos);
   }
 
   // * Otros métodos:
 
+  private void validarProducto(Producto producto) {
+
+    if (producto == null) {
+      throw new IllegalArgumentException("El producto no puede ser null.");
+    }
+
+    if (producto.getNombre() == null || producto.getNombre().trim().isEmpty()) {
+      throw new IllegalArgumentException("El nombre del producto no puede estar vacío.");
+    }
+
+    if (producto.getPrecio() <= 0) {
+      throw new IllegalArgumentException("El precio debe ser mayor a 0.");
+    }
+  }
+
+  /**
+   * Para añadir productos a la lista de forma controlada
+   * 
+   * @param producto Producto a agregar
+   */
   public void agregarProducto(Producto producto) {
+    validarProducto(producto);
+    if (productos.contains(producto)) {
+      throw new IllegalArgumentException("El producto ya está en la lista del pedido.");
+    }
     productos.add(producto);
   }
 
-  public double calcularTotal() {
-    double total = 0;
-    for (Producto producto : productos) { // Para añadir el precio final de cada producto introducido en la lista.
-      total += producto.calcularPrecioFinal();
+  /**
+   * Para eliminar productos de la lista de forma controlada
+   * 
+   * @param producto Producto a eliminar
+   */
+  public void eliminarProducto(Producto producto) {
+    if (producto == null) {
+      throw new NullPointerException("El producto no puede ser null.");
     }
-    return total;
+
+    if (!productos.remove(producto)) {
+      throw new IllegalArgumentException("El producto no existe en el pedido.");
+    }
   }
 
-  public void mostrarResumen() {
-    System.out.println("\nProductos:");
-    for (Producto producto : productos) { // Para imprimir cada producto introducido en la lista.
-      System.out.println("- " + producto.getNombre() + ", precio final: " + producto.calcularPrecioFinal() + " euros.");
-    }
-    System.out.println("\nTotal: " + calcularTotal() + " euros.");
+  /**
+   * Para calcular el precio total de la lista del pedido
+   * 
+   * @return Precio total
+   */
+  public double calcularTotal() {
+    return productos.stream()
+        .mapToDouble(Producto::calcularPrecioFinal) // Cogemos el precio final de cada producto de la lista.
+        .sum();
+  }
+
+  public String mostrarResumen() {
+    StringBuilder resumen = new StringBuilder();
+    resumen.append("Productos:\n");
+    productos.forEach(
+        p -> resumen
+            .append("- ")
+            .append(p.getNombre())
+            .append(", precio final: ")
+            .append(p.calcularPrecioFinal())
+            .append(" euros.\n"));
+    resumen
+        .append("Total: ")
+        .append(calcularTotal())
+        .append(" euros.");
+    return resumen.toString(); // Devolvemos la String construida
   }
 }
