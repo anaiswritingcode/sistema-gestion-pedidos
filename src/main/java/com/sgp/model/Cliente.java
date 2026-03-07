@@ -4,18 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
-  private int idCliente;
-  private static int contadorId = 0;
-  private String nombreCompleto;
-  private List<String> direcciones = new ArrayList<>();
+  private static int contadorId = 0; // 'static' para que se comparta entre instancias.
+  private final int idCliente;
+  private final String nombreCompleto;
+  private final List<String> direcciones;
   private String correo;
 
   // * Constructor:
 
   public Cliente(String nombreCompleto, String correo) {
-    contadorId++;
-    idCliente = contadorId;
+
+    if (nombreCompleto == null || nombreCompleto.isEmpty()) {
+      throw new IllegalArgumentException("El nombre no puede estar vacío.");
+    }
+
+    if (correo == null) {
+      throw new NullPointerException("El correo no puede ser null.");
+    }
+    if (!correo.contains("@") || correo.isEmpty()) {
+      throw new IllegalArgumentException("El correo introducido es inválido.");
+    }
+
+    this.idCliente = contadorId++;
     this.nombreCompleto = nombreCompleto;
+    this.direcciones = new ArrayList<>();
     this.correo = correo;
   }
 
@@ -29,14 +41,8 @@ public class Cliente {
     return nombreCompleto;
   }
 
-  public String[] getDirecciones() {
-    String[] nombreDirecciones = new String[direcciones.size()];
-    int contadorDirecciones = 0;
-    for (String direccion : direcciones) { // Para ir metiendo cada direccion introducida en la lista dentro de un
-                                           // array.
-      nombreDirecciones[contadorDirecciones++] = direccion;
-    }
-    return nombreDirecciones;
+  public List<String> getDirecciones() {
+    return new ArrayList<>(direcciones);
   }
 
   public String getCorreo() {
@@ -45,18 +51,61 @@ public class Cliente {
 
   // * Setters:
 
-  public void setDireccion(String direccion) { // Para añadir direcciones de las que elegir.
-    direcciones.add(direccion);
-  }
+  public void setCorreo(String nuevoCorreo) { // Para asignar un nuevo correo de forma controlada.
+    if (nuevoCorreo == null) {
+      throw new NullPointerException("El correo no puede ser null.");
+    }
 
-  public void setCorreo(String correo) { // Para asignar un nuevo correo.
-    this.correo = correo;
+    if (!nuevoCorreo.contains("@") || nuevoCorreo.isEmpty()) {
+      throw new IllegalArgumentException("El correo introducido es inválido.");
+    }
+
+    this.correo = nuevoCorreo;
   }
 
   // * Otros métodos:
 
   @Override // Sobreescribe el método toString() propio de objetos en Java.
   public String toString() {
-    return "\nCliente: " + nombreCompleto + ", correo: " + correo + ", ID: " + idCliente + ".";
+    return String.format("Cliente: %s, correo: %s, ID: %s", nombreCompleto, correo, idCliente);
+  }
+
+  /**
+   * Para añadir direcciones de las que elegir de forma controlada
+   * 
+   * @param direccion Dirección a añadir
+   */
+  public void agregarDireccion(String direccion) {
+    if (direccion == null || direccion.isEmpty()) {
+      throw new IllegalArgumentException("La dirección no puede estar vacía.");
+    }
+    direcciones.add(direccion);
+  }
+
+  /**
+   * Para eliminar direcciones de forma controlada
+   * 
+   * @param direccion Dirección a eliminar
+   */
+  public void eliminarDireccion(String direccion) {
+    direcciones.remove(direccion);
+  }
+
+  /**
+   * Para modificar direcciones de forma controlada
+   * 
+   * @param numDireccion Nº de la lista, empezando por 0
+   * @param direccion    Dirección nueva con la que modificar
+   */
+  public void modificarDireccion(int numDireccion, String direccion) {
+    if (numDireccion < 0 || numDireccion >= direcciones.size()) {
+      throw new IndexOutOfBoundsException("Índice inválido: " + numDireccion);
+    }
+
+    if (direccion == null || direccion.isEmpty()) {
+      throw new IllegalArgumentException("La dirección no puede estar vacía.");
+    }
+
+    direcciones.set(numDireccion, direccion);
   }
 }
