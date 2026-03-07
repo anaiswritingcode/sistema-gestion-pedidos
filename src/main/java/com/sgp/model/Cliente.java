@@ -14,16 +14,23 @@ public class Cliente {
 
   public Cliente(String nombreCompleto, String correo) {
 
+    // Validación interna de 'nombreCompleto':
+
     if (nombreCompleto == null || nombreCompleto.isEmpty()) {
       throw new IllegalArgumentException("El nombre no puede estar vacío.");
     }
 
+    // Validaciones internas de 'correo':
+
     if (correo == null) {
       throw new NullPointerException("El correo no puede ser null.");
     }
+
     if (!correo.contains("@") || correo.isEmpty()) {
       throw new IllegalArgumentException("El correo introducido es inválido.");
     }
+
+    // Asignación de variables:
 
     this.idCliente = contadorId++;
     this.nombreCompleto = nombreCompleto;
