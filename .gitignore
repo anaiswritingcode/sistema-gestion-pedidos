@@ -1,1 +1,6 @@
-bin/
+/bin
+.env
+target/
+logs/
+*.log
+*.class
