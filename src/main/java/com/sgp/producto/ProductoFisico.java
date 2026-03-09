@@ -7,25 +7,37 @@ public class ProductoFisico extends Producto {
 
   public ProductoFisico(String nombre, double precio, double costeEnvio) {
     super(nombre, precio);
+
+    // Validación interna de 'costeEnvio':
+
+    if (costeEnvio <= 0) {
+      throw new IllegalArgumentException("El coste de envío debe ser positivo y mayor que 0.");
+    }
+
+    // Asignación de variables:
+
     this.costeEnvio = costeEnvio;
   }
 
   // * Getters:
 
-  // getNombre() y getPrecio() ya los implementa la superclase Producto y son
-  // accesibles desde la subclase ProductoFisico.
-
   public double getCosteEnvio() {
     return costeEnvio;
   }
 
+  // * Setters:
+
+  public void setCosteEnvio(double nuevoCosteEnvio) {
+    if (nuevoCosteEnvio <= 0) {
+      throw new IllegalArgumentException("El coste de envío debe ser positivo y mayor que 0.");
+    }
+    this.costeEnvio = nuevoCosteEnvio;
+  }
+
   // * Otros métodos:
 
-  @Override // Sobreescribe el método equivalente de Producto para hacer cálculos con
-            // atributos específicos de ProductoFisico.
+  @Override // Sobreescribe de Producto para hacer cálculos con los atributos específicos.
   public double calcularPrecioFinal() {
-    double precio = getPrecio() + costeEnvio; // Para calcular el precio final del producto teniendo en cuenta el coste
-                                              // de envío.
-    return Math.round(precio * 100.0) / 100.0; // Para redondear a dos decimales.
+    return Math.round((getPrecio() + costeEnvio) * 100.0) / 100.0;
   }
 }
