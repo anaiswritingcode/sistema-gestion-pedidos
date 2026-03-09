@@ -64,5 +64,5 @@ public abstract class Producto {
     return String.format("Producto: %s, precio %.2f", nombre, precio);
   }
 
-  protected abstract double calcularPrecioFinal();
+  public abstract double calcularPrecioFinal();
 }
