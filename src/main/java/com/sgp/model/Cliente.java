@@ -74,7 +74,7 @@ public class Cliente {
 
   @Override // Sobreescribe el método toString() propio de objetos en Java.
   public String toString() {
-    return String.format("Cliente: %s, correo: %s, ID: %s", nombreCompleto, correo, idCliente);
+    return String.format("Cliente: %s, correo: %s, ID: %d", nombreCompleto, correo, idCliente);
   }
 
   /**
