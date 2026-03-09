@@ -22,6 +22,8 @@ public abstract class Producto {
       throw new IllegalArgumentException("El precio debe ser positivo y mayor que 0.");
     }
 
+    // Asignación de variables:
+
     this.idProducto = contadorId++;
     this.nombre = nombre;
     this.precio = precio;
