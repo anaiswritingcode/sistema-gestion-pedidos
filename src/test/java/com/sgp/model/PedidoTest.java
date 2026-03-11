@@ -1,6 +1,8 @@
 package com.sgp.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -42,5 +44,15 @@ public class PedidoTest {
 
     assertFalse(totalFinal == totalInvalido,
         "El total no tendría que haber salido " + totalInvalido);
+  }
+
+  @Test
+  public void testExcepcionPedidoSinCliente() {
+
+    // Verificamos que salta una excepción al crear un pedido sin cliente asociado:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> new Pedido(null),
+        "Tendría que haber saltado una IllegalArgumentException al crear un pedido sin cliente asociado.");
   }
 }
