@@ -8,7 +8,7 @@ public abstract class Producto {
 
   // * Constructor:
 
-  public Producto(String nombre, double precio) {
+  protected Producto(String nombre, double precio) {
 
     // Validación interna de 'nombre':
 
