@@ -13,8 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <sonar.exclusions>**/ingenieriadirecta/**</sonar.exclusions>
     <sonar.host.url>http://localhost:9000</sonar.host.url>
     <sonar.projectKey>sistema-gestion-pedidos</sonar.projectKey>
@@ -55,13 +55,18 @@
           <version>3.0.2</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.13.0</version>
+          <configuration>
+            <source>21</source>
+            <target>21</target>
+          </configuration>
         </plugin>
         <plugin>
-				  <artifactId>maven-surefire-plugin</artifactId>
-				  <version>3.5.4</version>
-			  </plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.5.4</version>
+        </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
