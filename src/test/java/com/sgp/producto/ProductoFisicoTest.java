@@ -1,5 +1,6 @@
 package com.sgp.producto;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
@@ -36,5 +37,17 @@ class ProductoFisicoTest {
     assertThrows(IllegalArgumentException.class,
         () -> new ProductoFisico("Producto", 1.0, 0),
         "Tendría que haber saltado una IllegalArgumentException al crear un producto físico con un coste de envío menor o igual que 0.");
+  }
+
+  @Test
+  void testGetterProductoFisico() {
+
+    double costeEnvio = 1.0;
+
+    ProductoFisico producto = new ProductoFisico("Producto", 5.0, costeEnvio);
+
+    // Verificamos que funcione el getter de ProductoFisico:
+
+    assertEquals(costeEnvio, producto.getCosteEnvio());
   }
 }
