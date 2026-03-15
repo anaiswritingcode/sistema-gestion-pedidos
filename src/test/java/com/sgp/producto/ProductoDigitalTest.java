@@ -3,10 +3,10 @@ package com.sgp.producto;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
-public class ProductoDigitalTest {
+class ProductoDigitalTest {
 
   @Test
-  public void testCalculoIva() {
+  void testCalculoIva() {
 
     double precio = 5.0;
     double ivaEsperado = 0.21;

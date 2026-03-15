@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import com.sgp.producto.ProductoDigital;
 import com.sgp.producto.ProductoFisico;
 
-public class PedidoTest {
+class PedidoTest {
 
   @ParameterizedTest
   @CsvSource({
@@ -18,7 +18,7 @@ public class PedidoTest {
       "60, 12, 35, 0.13, 0.25, -29.67"
   })
 
-  public void testCalcularTotal(double precioProductoFisico, double costeEnvio,
+  void testCalcularTotal(double precioProductoFisico, double costeEnvio,
       double precioProductoDigital, double iva, double descuento, double totalInvalido) {
 
     // Productos de prueba:
@@ -47,7 +47,7 @@ public class PedidoTest {
   }
 
   @Test
-  public void testExcepcionPedidoSinCliente() {
+  void testExcepcionPedidoSinCliente() {
 
     // Verificamos que salta una excepción al crear un pedido sin cliente asociado:
 

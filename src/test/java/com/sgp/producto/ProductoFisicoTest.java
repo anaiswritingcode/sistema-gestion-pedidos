@@ -3,10 +3,10 @@ package com.sgp.producto;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
-public class ProductoFisicoTest {
+class ProductoFisicoTest {
 
   @Test
-  public void testCosteEnvio() {
+  void testCosteEnvio() {
 
     double precio = 14.0;
     double costeEnvio = 6.0;
