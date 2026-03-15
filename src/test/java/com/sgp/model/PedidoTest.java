@@ -2,6 +2,7 @@ package com.sgp.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
@@ -94,5 +95,23 @@ class PedidoTest {
     // Probamos que el precio final salga 3€:
 
     assertEquals(3.0, pedido.calcularTotal(), "El precio total final del pedido debería haber salido 3€");
+  }
+
+  @Test
+  void testCaracterEspecial() { // * CP-05
+
+    // Datos de prueba:
+
+    ProductoFisico producto = new ProductoFisico("Móvil", 1.0, 1.0);
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto);
+
+    // Verificamos que el nombre del producto no salga "M?vil":
+
+    assertNotEquals("M?vil", pedido.getProductos().get(0).getNombre(),
+        "El nombre del pedido no debería haber salido 'M?vil'");
   }
 }
