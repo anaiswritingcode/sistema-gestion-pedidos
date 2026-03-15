@@ -1,5 +1,6 @@
 package com.sgp.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -88,10 +89,10 @@ class PedidoTest {
 
     // Verificamos que el producto de tres euros esta agregado en el pedido:
 
-    assertTrue(pedido.getProductos().get(0).getPrecio() == 3, "El precio del producto debería haber salido 3€");
+    assertEquals(3.0, pedido.getProductos().get(0).getPrecio(), "El precio del producto debería haber salido 3€");
 
     // Probamos que el precio final salga 3€:
 
-    assertTrue(pedido.calcularTotal() == 3, "El precio total final del pedido debería haber salido 3€");
+    assertEquals(3.0, pedido.calcularTotal(), "El precio total final del pedido debería haber salido 3€");
   }
 }
