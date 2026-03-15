@@ -49,4 +49,27 @@ class ClienteTest {
     assertEquals(correo, cliente.getCorreo());
     assertFalse(cliente.getDirecciones() == null || cliente.getDirecciones().isEmpty());
   }
+
+  @Test
+  void testSetterCliente() {
+
+    String nombre = "Alfonso";
+    String correo = "alfonso@mail.com";
+
+    // Verificamos que funcionen el setter de Cliente:
+
+    Cliente cliente = new Cliente(nombre, correo);
+
+    assertThrows(IllegalArgumentException.class,
+        () -> cliente.setCorreo("alfonso2.com"),
+        "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo inválido.");
+
+    assertThrows(IllegalArgumentException.class,
+        () -> cliente.setCorreo(""),
+        "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo vacío.");
+
+    assertThrows(NullPointerException.class,
+        () -> cliente.setCorreo(null),
+        "Tendría que haber saltado una NullPointerException al establecer un nuevo correo de valor nulo.");
+  }
 }
