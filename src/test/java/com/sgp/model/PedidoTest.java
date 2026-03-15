@@ -141,4 +141,24 @@ class PedidoTest {
 
     assertNotEquals(-11.10, pedido.calcularTotal(), "El total del pedido no debería haber salido -11'10€");
   }
+
+  @Test
+  void testProductoDuplicado() {
+
+    // Datos de prueba:
+
+    ProductoFisico producto = new ProductoFisico("Producto", 10.0, 3.5);
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto);
+
+    // Verificamos que no salga duplicado el producto de antes:
+
+    assertEquals(1, pedido.getProductos().stream()
+        .filter(p -> p.getNombre().equals("Producto"))
+        .count(),
+        "No debería salir el producto duplicado en la lista del pedido");
+  }
 }
