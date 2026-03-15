@@ -56,7 +56,7 @@ class ClienteTest {
     String nombre = "Alfonso";
     String correo = "alfonso@mail.com";
 
-    // Verificamos que funcionen el setter de Cliente:
+    // Verificamos que funcione el setter de Cliente:
 
     Cliente cliente = new Cliente(nombre, correo);
 
