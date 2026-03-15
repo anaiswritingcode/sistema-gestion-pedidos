@@ -1,6 +1,9 @@
 package com.sgp.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class ClienteTest {
@@ -28,5 +31,22 @@ class ClienteTest {
     assertThrows(IllegalArgumentException.class,
         () -> new Cliente(nombre2, correo2),
         "Tendría que haber saltado una IllegalArgumentException al crear un cliente con nombre y correo vacíos.");
+  }
+
+  @Test
+  void testGettersCliente() {
+
+    String nombre = "Alfonso";
+    String correo = "alfonso@mail.com";
+
+    // Verificamos que funcionen los getters de Cliente:
+
+    Cliente cliente = new Cliente(nombre, correo);
+    cliente.agregarDireccion("Calle Abeto S/N");
+
+    assertTrue(cliente.getIdCliente() >= 0);
+    assertEquals(nombre, cliente.getNombreCompleto());
+    assertEquals(correo, cliente.getCorreo());
+    assertFalse(cliente.getDirecciones() == null || cliente.getDirecciones().isEmpty());
   }
 }
