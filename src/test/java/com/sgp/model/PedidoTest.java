@@ -2,6 +2,7 @@ package com.sgp.model;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -54,5 +55,22 @@ class PedidoTest {
     assertThrows(IllegalArgumentException.class,
         () -> new Pedido(null),
         "Tendría que haber saltado una IllegalArgumentException al crear un pedido sin cliente asociado.");
+  }
+
+  @Test
+  void testPedidoBufanda() { // * CP-01
+
+    // Datos de prueba:
+
+    ProductoFisico bufanda = new ProductoFisico("Bufanda", 10.0, 2.5);
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(bufanda);
+
+    // Verificamos que la bufanda esté agregada en la lista del pedido:
+
+    assertTrue(pedido.getProductos().contains(bufanda), "Tendría que estar el producto 'bufanda' en el pedido.");
   }
 }
