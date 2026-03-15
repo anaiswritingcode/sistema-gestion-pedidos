@@ -143,7 +143,7 @@ class PedidoTest {
   }
 
   @Test
-  void testProductoDuplicado() {
+  void testProductoDuplicado() { // * CP-08
 
     // Datos de prueba:
 
