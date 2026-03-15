@@ -1,6 +1,7 @@
 package com.sgp.producto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -47,5 +48,26 @@ class ProductoDigitalTest {
     // Verificamos que el precio final salga 49€:
 
     assertEquals(49.01, producto.calcularPrecioFinal(), "El precio final tendría que haber salido 49.01€");
+  }
+
+  @Test
+  void testCreacionProductoDigital() {
+
+    double tamannoDescarga = 0.0;
+    String licencia1 = null;
+    String licencia2 = "";
+
+    /*
+     * Verificamos que saltan excepciones al crear
+     * productos digitales con datos inválidos:
+     */
+
+    assertThrows(IllegalArgumentException.class,
+        () -> new ProductoDigital("Producto", 8.5, tamannoDescarga, licencia1),
+        "Tendría que haber saltado una IllegalArgumentException al crear un producto digital con tamaño de descarga y licencia inválidos.");
+
+    assertThrows(IllegalArgumentException.class,
+        () -> new ProductoDigital("Producto", 8.5, 1.0, licencia2),
+        "Tendría que haber saltado una IllegalArgumentException al crear un producto digital con licencia inválida.");
   }
 }
