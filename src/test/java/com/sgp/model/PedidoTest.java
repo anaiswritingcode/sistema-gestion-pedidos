@@ -114,4 +114,31 @@ class PedidoTest {
     assertNotEquals("M?vil", pedido.getProductos().get(0).getNombre(),
         "El nombre del pedido no debería haber salido 'M?vil'");
   }
+
+  @Test
+  void testTotalDosProductos() { // * CP-06
+
+    // Datos de prueba:
+
+    ProductoDigital producto1 = new ProductoDigital("Producto 1", 5.0, 0.1, "Todos los derechos reservados");
+    producto1.asignarIva(0.1);
+
+    ProductoDigital producto2 = new ProductoDigital("Producto 2", 6.0, 1.0, "Todos los derechos reservados");
+    producto2.asignarIva(0.1);
+    producto2.asignarDescuento(0.15);
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto1);
+    pedido.agregarProducto(producto2);
+
+    // Verificamos que el total final no salga 11'10€ ni 0€ ni -11'10€:
+
+    assertNotEquals(11.10, pedido.calcularTotal(), "El total del pedido no debería haber salido 11'10€");
+
+    assertNotEquals(0, pedido.calcularTotal(), "El total del pedido no debería haber salido 0€");
+
+    assertNotEquals(-11.10, pedido.calcularTotal(), "El total del pedido no debería haber salido -11'10€");
+  }
 }
