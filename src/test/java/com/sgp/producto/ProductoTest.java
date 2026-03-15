@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ProductoTest {
 
   @Test
-  void testCreacionProductoBase() {
+  void testCreacionProductoBase() { // * CP-10 se incluye dentro pero sin AssertFalse.
 
     String nombre1 = "";
     String nombre2 = null;
