@@ -19,7 +19,7 @@ class PedidoTest {
   })
 
   void testCalcularTotal(double precioProductoFisico, double costeEnvio,
-      double precioProductoDigital, double iva, double descuento, double totalInvalido) {
+      double precioProductoDigital, double iva, double descuento, double totalInvalido) { // * CP-09
 
     // Productos de prueba:
 
@@ -47,7 +47,7 @@ class PedidoTest {
   }
 
   @Test
-  void testExcepcionPedidoSinCliente() {
+  void testExcepcionPedidoSinCliente() { // * CP-11
 
     // Verificamos que salta una excepción al crear un pedido sin cliente asociado:
 

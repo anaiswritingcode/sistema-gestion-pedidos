@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ProductoDigitalTest {
 
   @Test
-  void testCalculoIva() {
+  void testCalculoIva() { // * CP-03
 
     double precio = 5.0;
     double ivaEsperado = 0.21;

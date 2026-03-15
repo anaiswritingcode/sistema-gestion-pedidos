@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class ProductoFisicoTest {
 
   @Test
-  void testCosteEnvio() {
+  void testCosteEnvio() { // * CP-07
 
     double precio = 14.0;
     double costeEnvio = 6.0;
