@@ -73,4 +73,25 @@ class PedidoTest {
 
     assertTrue(pedido.getProductos().contains(bufanda), "Tendría que estar el producto 'bufanda' en el pedido.");
   }
+
+  @Test
+  void testPedidoTresEuros() { // * CP-02
+
+    // Datos de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Monedas", 3.0, 0.1, "N/A");
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto);
+
+    // Verificamos que el producto de tres euros esta agregado en el pedido:
+
+    assertTrue(pedido.getProductos().get(0).getPrecio() == 3, "El precio del producto debería haber salido 3€");
+
+    // Probamos que el precio final salga 3€:
+
+    assertTrue(pedido.calcularTotal() == 3, "El precio total final del pedido debería haber salido 3€");
+  }
 }
