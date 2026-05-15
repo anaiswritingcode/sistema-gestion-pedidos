@@ -105,15 +105,20 @@ public class Pedido {
      * Para calcular el precio total de la lista del pedido.
      * 
      * @return Precio total.
+     * @throws Exception
      */
-    public double calcularTotal() {
+    public double calcularTotal() throws Exception {
+        if (productos.isEmpty()) {
+            throw new Exception("La lista de productos no puede estar vacía.");
+        }
+
         return productos.stream()
                 // Cogemos el precio final de cada producto de la lista:
                 .mapToDouble(Producto::calcularPrecioFinal)
                 .sum();
     }
 
-    public String mostrarResumen() {
+    public String mostrarResumen() throws Exception {
         StringBuilder resumen = new StringBuilder();
         resumen.append("Productos:\n");
         productos.forEach(

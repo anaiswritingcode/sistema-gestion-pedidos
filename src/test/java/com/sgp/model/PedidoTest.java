@@ -21,8 +21,9 @@ class PedidoTest {
       "60, CHINA, 35, REDUCIDO, 0.25, -29.67, 2.5"
   })
 
+  // * CP-09:
   void testCalcularTotal(double precioProductoFisico, String zonaDestino,
-      double precioProductoDigital, String iva, double descuento, double totalInvalido, double peso) { // * CP-09
+      double precioProductoDigital, String iva, double descuento, double totalInvalido, double peso) throws Exception {
 
     // Productos de prueba:
 
@@ -77,7 +78,7 @@ class PedidoTest {
   }
 
   @Test
-  void testPedidoTresEuros() { // * CP-02
+  void testPedidoTresEuros() throws Exception { // * CP-02
 
     // Datos de prueba:
 
@@ -116,7 +117,7 @@ class PedidoTest {
   }
 
   @Test
-  void testTotalDosProductos() { // * CP-06
+  void testTotalDosProductos() throws Exception { // * CP-06
 
     // Datos de prueba:
 
