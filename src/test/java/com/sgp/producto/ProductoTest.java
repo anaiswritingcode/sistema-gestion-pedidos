@@ -23,7 +23,7 @@ class ProductoTest {
                 "Tendría que haber saltado una IllegalArgumentException al crear un producto con nombre y precio inválidos.");
 
         assertThrows(IllegalArgumentException.class,
-                () -> new ProductoFisico(nombre2, precio2, 2.0),
+                () -> new ProductoFisico(nombre2, precio2, 2.0, "ESPAÑA"),
                 "Tendría que haber saltado una IllegalArgumentException al crear un producto con nombre y precio inválidos.");
     }
 
@@ -35,7 +35,7 @@ class ProductoTest {
 
         // Verificamos que funcionen los setters de Producto:
 
-        ProductoFisico producto = new ProductoFisico(nombre, precio, 12.0);
+        ProductoFisico producto = new ProductoFisico(nombre, precio, 12.0, "FRANCIA");
 
         assertThrows(IllegalArgumentException.class,
                 () -> producto.setNombre(""),

@@ -1,7 +1,6 @@
 package com.sgp.producto;
 
 public class ProductoFisico extends Producto {
-  private double costeEnvio;
   private double peso;
   private String zonaDestino;
 
@@ -14,8 +13,6 @@ public class ProductoFisico extends Producto {
     // Validación interna de 'peso':
     if (peso <= 0) {
       throw new IllegalArgumentException("El peso debe ser positivo.");
-    } else {
-      this.costeEnvio += peso;
     }
 
     // Validación interna de 'zonaDestino':
@@ -25,16 +22,9 @@ public class ProductoFisico extends Producto {
       zonaDestino = "ESPANA";
     }
 
-    switch (zonaDestino.toUpperCase()) {
-      case "ESPANA" -> this.costeEnvio += 0.0;
-      case "FRANCIA" -> this.costeEnvio += 5.0;
-      case "ITALIA" -> this.costeEnvio += 5.0;
-      case "PORTUGAL" -> this.costeEnvio += 5.0;
-      default -> this.costeEnvio += 10.0;
-    }
-
     // Asignación de variables:
     this.peso = peso;
+    this.zonaDestino = zonaDestino.toUpperCase();
   }
 
   // * GETTERS:

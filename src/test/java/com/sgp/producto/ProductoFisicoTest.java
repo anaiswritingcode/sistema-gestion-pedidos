@@ -11,13 +11,14 @@ class ProductoFisicoTest {
   void testCosteEnvio() { // * CP-07
 
     double precio = 14.0;
-    double costeEnvio = 6.0;
+    double peso = 6.0;
+    String zonaDestino = "ESPAÑA";
 
     // Productos físicos de prueba:
 
-    ProductoFisico producto1 = new ProductoFisico("Producto 1", precio, costeEnvio);
-    ProductoFisico producto2 = new ProductoFisico("Producto 2", precio, costeEnvio);
-    ProductoFisico producto3 = new ProductoFisico("Producto 3", precio, costeEnvio);
+    ProductoFisico producto1 = new ProductoFisico("Producto 1", precio, peso, zonaDestino);
+    ProductoFisico producto2 = new ProductoFisico("Producto 2", precio, peso, zonaDestino);
+    ProductoFisico producto3 = new ProductoFisico("Producto 3", precio, peso, zonaDestino);
 
     double precioFinalTotal = (producto1.calcularPrecioFinal()
         + producto2.calcularPrecioFinal()
@@ -35,16 +36,18 @@ class ProductoFisicoTest {
     // Verificamos que salta una excepción con costes de envío inválidos:
 
     assertThrows(IllegalArgumentException.class,
-        () -> new ProductoFisico("Producto", 1.0, 0),
+        () -> new ProductoFisico("Producto", 1.0, 0, "ESPAÑA"),
         "Tendría que haber saltado una IllegalArgumentException al crear un producto físico con un coste de envío menor o igual que 0.");
   }
 
   @Test
   void testGetterProductoFisico() {
 
-    double costeEnvio = 1.0;
+    double costeEnvio = 5.0;
+    double peso = 5.0;
+    String zonaDestino = "ESPAÑA";
 
-    ProductoFisico producto = new ProductoFisico("Producto", 5.0, costeEnvio);
+    ProductoFisico producto = new ProductoFisico("Producto", 5.0, peso, zonaDestino);
 
     // Verificamos que funcione el getter de ProductoFisico:
 

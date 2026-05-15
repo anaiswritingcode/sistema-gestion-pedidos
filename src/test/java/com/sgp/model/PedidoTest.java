@@ -16,17 +16,17 @@ class PedidoTest {
 
   @ParameterizedTest
   @CsvSource({
-      "60, 12, 35, REDUCIDO, 0.25, 29.67",
-      "60, 12, 35, REDUCIDO, 0.25, 0",
-      "60, 12, 35, REDUCIDO, 0.25, -29.67"
+      "60, ESPAÑA, 35, REDUCIDO, 0.25, 29.67, 3.4",
+      "60, ITALIA, 35, REDUCIDO, 0.25, 0, 7.2",
+      "60, CHINA, 35, REDUCIDO, 0.25, -29.67, 2.5"
   })
 
-  void testCalcularTotal(double precioProductoFisico, double costeEnvio,
-      double precioProductoDigital, String iva, double descuento, double totalInvalido) { // * CP-09
+  void testCalcularTotal(double precioProductoFisico, String zonaDestino,
+      double precioProductoDigital, String iva, double descuento, double totalInvalido, double peso) { // * CP-09
 
     // Productos de prueba:
 
-    ProductoFisico productoFisico = new ProductoFisico("Producto 1", precioProductoFisico, costeEnvio);
+    ProductoFisico productoFisico = new ProductoFisico("Producto 1", precioProductoFisico, peso, zonaDestino);
     ProductoDigital productoDigital = new ProductoDigital("Producto 2", precioProductoDigital, 1.0,
         "Todos los derechos reservados");
 
@@ -64,7 +64,7 @@ class PedidoTest {
 
     // Datos de prueba:
 
-    ProductoFisico bufanda = new ProductoFisico("Bufanda", 10.0, 2.5);
+    ProductoFisico bufanda = new ProductoFisico("Bufanda", 10.0, 2.5, "PORTUGAL");
 
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
@@ -102,7 +102,7 @@ class PedidoTest {
 
     // Datos de prueba:
 
-    ProductoFisico producto = new ProductoFisico("Móvil", 1.0, 1.0);
+    ProductoFisico producto = new ProductoFisico("Móvil", 1.0, 1.0, "FRANCIA");
 
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
@@ -147,7 +147,7 @@ class PedidoTest {
 
     // Datos de prueba:
 
-    ProductoFisico producto = new ProductoFisico("Producto", 10.0, 3.5);
+    ProductoFisico producto = new ProductoFisico("Producto", 10.0, 3.5, "ESPAÑA");
 
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
