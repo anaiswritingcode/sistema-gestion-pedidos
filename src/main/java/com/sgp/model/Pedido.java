@@ -108,14 +108,31 @@ public class Pedido {
      * @throws Exception
      */
     public double calcularTotal() throws Exception {
+
+        double total;
+        int annosAntiguedad = this.getCliente().getAnnosAntiguedad();
+        boolean esVip = this.getCliente().getEsVip();
+
         if (productos.isEmpty()) {
             throw new Exception("La lista de productos no puede estar vacía.");
         }
 
-        return productos.stream()
+        total = productos.stream()
                 // Cogemos el precio final de cada producto de la lista:
                 .mapToDouble(Producto::calcularPrecioFinal)
                 .sum();
+
+        if (annosAntiguedad > 5) {
+            total *= 0.8;
+        } else if (annosAntiguedad > 2) {
+            total *= 0.9;
+        }
+
+        if (esVip) {
+            total *= 0.75;
+        }
+
+        return total;
     }
 
     public String mostrarResumen() throws Exception {
