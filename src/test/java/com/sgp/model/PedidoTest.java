@@ -36,7 +36,7 @@ class PedidoTest {
 
     // Pedido en el que meterlos, junto a un cliente de prueba asociado:
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
     Pedido pedido = new Pedido(cliente);
 
     pedido.agregarProducto(productoFisico, 1);
@@ -67,7 +67,7 @@ class PedidoTest {
 
     ProductoFisico bufanda = new ProductoFisico("Bufanda", 10.0, 2.5, "PORTUGAL");
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
 
     Pedido pedido = new Pedido(cliente);
     pedido.agregarProducto(bufanda, 1);
@@ -84,7 +84,7 @@ class PedidoTest {
 
     ProductoDigital producto = new ProductoDigital("Monedas", 3.0, 0.1, "N/A");
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
 
     Pedido pedido = new Pedido(cliente);
     pedido.agregarProducto(producto, 1);
@@ -105,7 +105,7 @@ class PedidoTest {
 
     ProductoFisico producto = new ProductoFisico("Móvil", 1.0, 1.0, "FRANCIA");
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
 
     Pedido pedido = new Pedido(cliente);
     pedido.agregarProducto(producto, 1);
@@ -128,7 +128,7 @@ class PedidoTest {
     producto2.aplicarIva("REDUCIDO");
     producto2.asignarDescuento(0.15);
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
 
     Pedido pedido = new Pedido(cliente);
     pedido.agregarProducto(producto1, 1);
@@ -150,7 +150,7 @@ class PedidoTest {
 
     ProductoFisico producto = new ProductoFisico("Producto", 10.0, 3.5, "ESPAÑA");
 
-    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
 
     Pedido pedido = new Pedido(cliente);
     pedido.agregarProducto(producto, 1);

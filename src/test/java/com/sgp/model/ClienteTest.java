@@ -8,68 +8,68 @@ import org.junit.jupiter.api.Test;
 
 class ClienteTest {
 
-  @Test
-  void testCreacionCliente() {
+    @Test
+    void testCreacionCliente() {
 
-    String nombre1 = null;
-    String nombre2 = "";
-    String nombre3 = "Alfonso";
-    String correo1 = null;
-    String correo2 = "";
-    String correo3 = "alfonso.com";
+        String nombre1 = null;
+        String nombre2 = "";
+        String nombre3 = "Alfonso";
+        String correo1 = null;
+        String correo2 = "";
+        String correo3 = "alfonso.com";
 
-    // Verificamos que salta una excepción al crear clientes con datos inválidos:
+        // Verificamos que salta una excepción al crear clientes con datos inválidos:
 
-    assertThrows(IllegalArgumentException.class,
-        () -> new Cliente(nombre1, correo3),
-        "Tendría que haber saltado una IllegalArgumentException al crear un cliente con nombre y correo inválidos.");
+        assertThrows(IllegalArgumentException.class,
+                () -> new Cliente(nombre1, correo3, 1, false, "ESPAÑA"),
+                "Tendría que haber saltado una IllegalArgumentException al crear un cliente con nombre y correo inválidos.");
 
-    assertThrows(NullPointerException.class,
-        () -> new Cliente(nombre3, correo1),
-        "Tendría que haber saltado una NullPointerException al crear un cliente con un correo de valor nulo.");
+        assertThrows(NullPointerException.class,
+                () -> new Cliente(nombre3, correo1, 1, false, "ESPAÑA"),
+                "Tendría que haber saltado una NullPointerException al crear un cliente con un correo de valor nulo.");
 
-    assertThrows(IllegalArgumentException.class,
-        () -> new Cliente(nombre2, correo2),
-        "Tendría que haber saltado una IllegalArgumentException al crear un cliente con nombre y correo vacíos.");
-  }
+        assertThrows(IllegalArgumentException.class,
+                () -> new Cliente(nombre2, correo2, 1, false, "ESPAÑA"),
+                "Tendría que haber saltado una IllegalArgumentException al crear un cliente con nombre y correo vacíos.");
+    }
 
-  @Test
-  void testGettersCliente() {
+    @Test
+    void testGettersCliente() {
 
-    String nombre = "Alfonso";
-    String correo = "alfonso@mail.com";
+        String nombre = "Alfonso";
+        String correo = "alfonso@mail.com";
 
-    // Verificamos que funcionen los getters de Cliente:
+        // Verificamos que funcionen los getters de Cliente:
 
-    Cliente cliente = new Cliente(nombre, correo);
-    cliente.agregarDireccion("Calle Abeto S/N");
+        Cliente cliente = new Cliente(nombre, correo, 1, false, "ESPAÑA");
+        cliente.agregarDireccion("Calle Abeto S/N");
 
-    assertTrue(cliente.getIdCliente() >= 0);
-    assertEquals(nombre, cliente.getNombreCompleto());
-    assertEquals(correo, cliente.getCorreo());
-    assertFalse(cliente.getDirecciones() == null || cliente.getDirecciones().isEmpty());
-  }
+        assertTrue(cliente.getIdCliente() >= 0);
+        assertEquals(nombre, cliente.getNombreCompleto());
+        assertEquals(correo, cliente.getCorreo());
+        assertFalse(cliente.getDirecciones() == null || cliente.getDirecciones().isEmpty());
+    }
 
-  @Test
-  void testSetterCliente() {
+    @Test
+    void testSetterCliente() {
 
-    String nombre = "Alfonso";
-    String correo = "alfonso@mail.com";
+        String nombre = "Alfonso";
+        String correo = "alfonso@mail.com";
 
-    // Verificamos que funcione el setter de Cliente:
+        // Verificamos que funcione el setter de Cliente:
 
-    Cliente cliente = new Cliente(nombre, correo);
+        Cliente cliente = new Cliente(nombre, correo, 1, false, "ESPAÑA");
 
-    assertThrows(IllegalArgumentException.class,
-        () -> cliente.setCorreo("alfonso2.com"),
-        "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo inválido.");
+        assertThrows(IllegalArgumentException.class,
+                () -> cliente.setCorreo("alfonso2.com"),
+                "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo inválido.");
 
-    assertThrows(IllegalArgumentException.class,
-        () -> cliente.setCorreo(""),
-        "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo vacío.");
+        assertThrows(IllegalArgumentException.class,
+                () -> cliente.setCorreo(""),
+                "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo correo vacío.");
 
-    assertThrows(NullPointerException.class,
-        () -> cliente.setCorreo(null),
-        "Tendría que haber saltado una NullPointerException al establecer un nuevo correo de valor nulo.");
-  }
+        assertThrows(NullPointerException.class,
+                () -> cliente.setCorreo(null),
+                "Tendría que haber saltado una NullPointerException al establecer un nuevo correo de valor nulo.");
+    }
 }
