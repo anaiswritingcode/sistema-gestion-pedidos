@@ -38,8 +38,8 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
     Pedido pedido = new Pedido(cliente);
 
-    pedido.agregarProducto(productoFisico);
-    pedido.agregarProducto(productoDigital);
+    pedido.agregarProducto(productoFisico, 1);
+    pedido.agregarProducto(productoDigital, 1);
 
     // Verificamos que el total no salga 29'67€ o 0€ o -29'67€:
 
@@ -69,7 +69,7 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
     Pedido pedido = new Pedido(cliente);
-    pedido.agregarProducto(bufanda);
+    pedido.agregarProducto(bufanda, 1);
 
     // Verificamos que la bufanda esté agregada en la lista del pedido:
 
@@ -86,7 +86,7 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
     Pedido pedido = new Pedido(cliente);
-    pedido.agregarProducto(producto);
+    pedido.agregarProducto(producto, 1);
 
     // Verificamos que el producto de tres euros esta agregado en el pedido:
 
@@ -107,7 +107,7 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
     Pedido pedido = new Pedido(cliente);
-    pedido.agregarProducto(producto);
+    pedido.agregarProducto(producto, 1);
 
     // Verificamos que el nombre del producto no salga "M?vil":
 
@@ -130,8 +130,8 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
     Pedido pedido = new Pedido(cliente);
-    pedido.agregarProducto(producto1);
-    pedido.agregarProducto(producto2);
+    pedido.agregarProducto(producto1, 1);
+    pedido.agregarProducto(producto2, 1);
 
     // Verificamos que el total final no salga 11'10€ ni 0€ ni -11'10€:
 
@@ -152,7 +152,7 @@ class PedidoTest {
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");
 
     Pedido pedido = new Pedido(cliente);
-    pedido.agregarProducto(producto);
+    pedido.agregarProducto(producto, 1);
 
     // Verificamos que no salga duplicado el producto de antes:
 
