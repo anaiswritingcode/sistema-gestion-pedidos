@@ -16,13 +16,13 @@ class PedidoTest {
 
   @ParameterizedTest
   @CsvSource({
-      "60, 12, 35, 0.13, 0.25, 29.67",
-      "60, 12, 35, 0.13, 0.25, 0",
-      "60, 12, 35, 0.13, 0.25, -29.67"
+      "60, 12, 35, REDUCIDO, 0.25, 29.67",
+      "60, 12, 35, REDUCIDO, 0.25, 0",
+      "60, 12, 35, REDUCIDO, 0.25, -29.67"
   })
 
   void testCalcularTotal(double precioProductoFisico, double costeEnvio,
-      double precioProductoDigital, double iva, double descuento, double totalInvalido) { // * CP-09
+      double precioProductoDigital, String iva, double descuento, double totalInvalido) { // * CP-09
 
     // Productos de prueba:
 
@@ -30,7 +30,7 @@ class PedidoTest {
     ProductoDigital productoDigital = new ProductoDigital("Producto 2", precioProductoDigital, 1.0,
         "Todos los derechos reservados");
 
-    productoDigital.asignarIva(iva);
+    productoDigital.aplicarIva(iva);
     productoDigital.asignarDescuento(descuento);
 
     // Pedido en el que meterlos, junto a un cliente de prueba asociado:
@@ -121,10 +121,10 @@ class PedidoTest {
     // Datos de prueba:
 
     ProductoDigital producto1 = new ProductoDigital("Producto 1", 5.0, 0.1, "Todos los derechos reservados");
-    producto1.asignarIva(0.1);
+    producto1.aplicarIva("REDUCIDO");
 
     ProductoDigital producto2 = new ProductoDigital("Producto 2", 6.0, 1.0, "Todos los derechos reservados");
-    producto2.asignarIva(0.1);
+    producto2.aplicarIva("REDUCIDO");
     producto2.asignarDescuento(0.15);
 
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com");

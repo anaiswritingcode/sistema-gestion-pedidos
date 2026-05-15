@@ -11,22 +11,22 @@ class ProductoDigitalTest {
   void testCalculoIva() { // * CP-03
 
     double precio = 5.0;
-    double ivaEsperado = 0.21;
+    String ivaEsperado = "GENERAL";
 
     // Producto digital de prueba:
 
     ProductoDigital producto = new ProductoDigital("Calendario 2026", precio, 12.00, "Todos los derechos reservados");
 
-    producto.asignarIva(ivaEsperado);
+    producto.aplicarIva(ivaEsperado);
 
     // Verificamos que el IVA se haya asignado correctamente:
 
-    assertTrue(producto.getIva() == ivaEsperado, "El IVA tendría que haber salido '0.21'");
+    assertTrue(producto.getIva() == 0.21, "El IVA tendría que haber salido '0.21'");
 
     // Vemos si también funciona metido en el precio final:
 
     double precioFinal = producto.calcularPrecioFinal();
-    double precioFinalEsperado = Math.round(precio * (1 + ivaEsperado) * 100.0) / 100.0;
+    double precioFinalEsperado = Math.round(precio * (1 + 0.21) * 100.0) / 100.0;
 
     assertTrue(precioFinal == precioFinalEsperado, "El precio final tendría que haber salido '6.05'");
   }
@@ -35,14 +35,14 @@ class ProductoDigitalTest {
   void testCalculoTotal() { // * CP-04
 
     double precio = 45;
-    double iva = 0.21;
+    String iva = "GENERAL";
     double descuento = 0.1;
 
     // Producto digital de prueba:
 
     ProductoDigital producto = new ProductoDigital("Producto 1", precio, 0.5, "Todos los derechos reservados");
 
-    producto.asignarIva(iva);
+    producto.aplicarIva(iva);
     producto.asignarDescuento(descuento);
 
     // Verificamos que el precio final salga 49€:
@@ -58,8 +58,8 @@ class ProductoDigitalTest {
     String licencia2 = "";
 
     /*
-     * Verificamos que saltan excepciones al crear
-     * productos digitales con datos inválidos:
+     ** Verificamos que saltan excepciones al crear
+     ** productos digitales con datos inválidos:
      */
 
     assertThrows(IllegalArgumentException.class,

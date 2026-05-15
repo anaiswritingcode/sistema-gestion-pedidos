@@ -6,33 +6,30 @@ public class ProductoDigital extends Producto {
   private double iva;
   private double descuento;
 
-  // * Constructor:
+  // * CONSTRUCTOR:
 
-  public ProductoDigital(String nombre, double precio, double tamannoDescarga, String licencia) {
+  public ProductoDigital(String nombre, double precioBase, double tamannoDescarga, String licencia) {
 
-    super(nombre, precio);
+    super(nombre, precioBase);
 
     // Validación interna de 'tamannoDescarga':
-
     if (tamannoDescarga <= 0) {
-      throw new IllegalArgumentException("El tamaño de descarga debe ser positivo y mayor que 0.");
+      throw new IllegalArgumentException("El tamaño de descarga debe ser positivo.");
     }
 
     // Validación interna de 'licencia':
-
     if (licencia == null || licencia.isEmpty()) {
       throw new IllegalArgumentException("La licencia no puede estar vacía.");
     }
 
     // Asignación de variables:
-
     this.tamannoDescarga = tamannoDescarga;
     this.licencia = licencia;
-    this.iva = 0; // De forma predeterminada.
-    this.descuento = 0; // De forma predeterminada.
+    this.iva = 0; // De forma predeterminada hasta que se cambie.
+    this.descuento = 0; // De forma predeterminada hasta que se cambie.
   }
 
-  // * Getters:
+  // * GETTERS:
 
   public double getTamannoDescarga() {
     return tamannoDescarga;
@@ -50,50 +47,56 @@ public class ProductoDigital extends Producto {
     return descuento;
   }
 
-  // * Setters:
+  // * SETTERS:
 
   /**
-   * Para asignarle un nuevo tamaño de descarga al producto
+   * Asigna un nuevo tamaño de descarga al producto.
    * 
-   * @param nuevoTamannoDescarga Tamaño de descarga en MB
+   * @param nuevoTamannoDescarga Tamaño de descarga en MB.
    */
   public void setTamannoDescarga(double nuevoTamannoDescarga) {
     if (nuevoTamannoDescarga <= 0) {
-      throw new IllegalArgumentException("El tamaño de descarga debe ser positivo y mayor que 0.");
+      throw new IllegalArgumentException("El tamaño de descarga debe ser positivo.");
     }
     this.tamannoDescarga = nuevoTamannoDescarga;
   }
 
-  public void setLicencia(String nuevaLicencia) { // Para asignarle una nueva licencia al producto.
+  /**
+   * Asigna una nueva licencia al producto.
+   * 
+   * @param nuevaLicencia (e.g, "Todos lo derechos reservados")
+   */
+  public void setLicencia(String nuevaLicencia) {
     if (nuevaLicencia == null || nuevaLicencia.isEmpty()) {
       throw new IllegalArgumentException("La licencia no puede estar vacía.");
     }
     this.licencia = nuevaLicencia;
   }
 
-  // * Otros métodos:
+  // * OTROS MÉTODOS:
 
   /**
-   * Para asignarle un (nuevo) IVA a un producto de forma controlada
+   * Asigna un IVA nuevo/diferente al producto.
    * 
-   * @param iva IVA a asignar, en decimales
+   * @param tipoIva IVA a asignar: general (21%), reducido (10%) o súper (4%).
    */
-  public void asignarIva(double iva) {
-    if (iva <= 0) {
-      throw new IllegalArgumentException("El IVA debe ser positivo y mayor que 0.");
-    }
+  public void aplicarIva(String tipoIva) {
+    if (tipoIva.equalsIgnoreCase("SÚPER"))
+      tipoIva = "SUPER";
 
-    if (this.iva == iva) {
-      throw new IllegalArgumentException("Ese IVA ya estaba asignado al producto.");
+    switch (tipoIva.toUpperCase()) {
+      case "GENERAL" -> this.iva = 0.21;
+      case "REDUCIDO" -> this.iva = 0.10;
+      case "SUPER" -> this.iva = 0.04;
+      default ->
+        throw new IllegalArgumentException("El tipo de IVA debe ser 'general' (21%), 'reducido' (10%) o 'súper' (4%)");
     }
-
-    this.iva = iva;
   }
 
   /**
-   * Para asignarle un (nuevo) descuento a un producto de forma controlada
+   * Asigna un descuento nuevo/diferente al producto de forma controlada.
    * 
-   * @param descuento Descuento a asignar, en decimales
+   * @param descuento Descuento a asignar, en decimales.
    */
   public void asignarDescuento(double descuento) {
     if (descuento < 0 || descuento > 1) {
@@ -107,8 +110,10 @@ public class ProductoDigital extends Producto {
     this.descuento = descuento;
   }
 
-  @Override // Sobreescribe de Producto para hacer cálculos con los atributos específicos.
+  // Sobreescribe el de Producto para calcular con los atributos específicos:
+  @Override
   public double calcularPrecioFinal() {
-    return Math.round(getPrecio() * (1 + iva) * (1 - descuento) * 100.0) / 100.0;
+    double resultado = (getPrecio() * (1 - descuento)) * (1 + iva);
+    return Math.round(resultado * 100.0) / 100.0;
   }
 }
