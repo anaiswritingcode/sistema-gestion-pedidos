@@ -29,24 +29,6 @@ public class ProductoFisico extends Producto {
 
   // * GETTERS:
 
-  /*
-   ** Recalcula el coste de envío con cada llamada, por si se han cambiado
-   ** los valores de peso y/o zona de envío:
-   */
-  public double getCosteEnvio() {
-    double costeEnvioActual;
-
-    switch (this.zonaDestino) {
-      case "ESPANA" -> costeEnvioActual = 0.0;
-      case "FRANCIA" -> costeEnvioActual = 5.0;
-      case "ITALIA" -> costeEnvioActual = 5.0;
-      case "PORTUGAL" -> costeEnvioActual = 5.0;
-      default -> costeEnvioActual = 10.0;
-    }
-
-    return this.peso + costeEnvioActual;
-  }
-
   public double getPeso() {
     return peso;
   }
@@ -90,10 +72,33 @@ public class ProductoFisico extends Producto {
 
   // * OTROS MÉTODOS:
 
+  /**
+   * Calcula el coste de envío según el país de destino.
+   *
+   * @param pais País de destino (e.g, "ESPAÑA", "FRANCIA").
+   * @return Coste de envío en euros: 0 para España, 5 para
+   *         Francia/Italia/Portugal, 10 para el resto.
+   */
+  public double calcularCosteEnvio(String pais) {
+    if (pais == null || pais.isEmpty()) {
+      throw new IllegalArgumentException("El país de destino no puede estar vacío.");
+    }
+
+    String paisNormalizado = pais.trim().toUpperCase()
+        .replace("ESPAÑA", "ESPANA")
+        .replace("ESPA?A", "ESPANA");
+
+    return switch (paisNormalizado) {
+      case "ESPANA" -> 0.0;
+      case "FRANCIA", "ITALIA", "PORTUGAL" -> 5.0;
+      default -> 10.0;
+    };
+  }
+
   // Sobreescribe el de Producto para calcular con los atributos específicos:
   @Override
   public double calcularPrecioFinal() {
-    double precioTotal = getPrecio() + getCosteEnvio();
+    double precioTotal = getPrecio() + calcularCosteEnvio(this.zonaDestino);
     return Math.round(precioTotal * 100.0) / 100.0;
   }
 }

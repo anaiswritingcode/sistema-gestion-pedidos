@@ -41,16 +41,14 @@ class ProductoFisicoTest {
   }
 
   @Test
-  void testGetterProductoFisico() {
+  void testCalcularCosteEnvio() {
 
-    double costeEnvio = 5.0;
-    double peso = 5.0;
-    String zonaDestino = "ESPAÑA";
+    ProductoFisico producto = new ProductoFisico("Producto", 5.0, 5.0, "ESPAÑA");
 
-    ProductoFisico producto = new ProductoFisico("Producto", 5.0, peso, zonaDestino);
+    // España → 0€, Francia → 5€, resto → 10€:
 
-    // Verificamos que funcione el getter de ProductoFisico:
-
-    assertEquals(costeEnvio, producto.getCosteEnvio());
+    assertEquals(0.0, producto.calcularCosteEnvio("ESPAÑA"));
+    assertEquals(5.0, producto.calcularCosteEnvio("FRANCIA"));
+    assertEquals(10.0, producto.calcularCosteEnvio("CHINA"));
   }
 }
