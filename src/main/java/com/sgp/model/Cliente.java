@@ -32,7 +32,7 @@ public class Cliente {
 
         // Validación interna de 'annosAntiguedad':
         if (annosAntiguedad < 0) {
-            throw new NullPointerException("Los años de antigüedad no pueden ser negativos.");
+            throw new IllegalArgumentException("Los años de antigüedad no pueden ser negativos.");
         }
 
         // Validación interna de 'pais':
@@ -106,7 +106,7 @@ public class Cliente {
      */
     public void setAnnosAntiguedad(int annosAntiguedad) {
         if (annosAntiguedad < 0) {
-            throw new NullPointerException("Los años de antigüedad no pueden ser negativos.");
+            throw new IllegalArgumentException("Los años de antigüedad no pueden ser negativos.");
         }
 
         this.annosAntiguedad = annosAntiguedad;
