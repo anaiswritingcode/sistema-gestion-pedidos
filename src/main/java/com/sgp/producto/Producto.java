@@ -16,8 +16,8 @@ public abstract class Producto {
     }
 
     // Validación interna de 'precio':
-    if (precioBase <= 0) {
-      throw new IllegalArgumentException("El precio debe ser positivo.");
+    if (precioBase < 0) {
+      throw new IllegalArgumentException("El precio no puede ser negativo.");
     }
 
     // Asignación de variables:
@@ -60,8 +60,8 @@ public abstract class Producto {
    * @param nuevoPrecio
    */
   public void setPrecioBase(double nuevoPrecio) {
-    if (nuevoPrecio <= 0) {
-      throw new IllegalArgumentException("El precio debe ser positivo.");
+    if (nuevoPrecio < 0) {
+      throw new IllegalArgumentException("El precio no puede ser negativo.");
     }
     this.precioBase = nuevoPrecio;
   }
