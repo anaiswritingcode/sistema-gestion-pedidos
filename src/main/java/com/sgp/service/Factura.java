@@ -64,16 +64,26 @@ public class Factura {
 
     // * GETTERS:
 
+    /**
+     * Devuelve el código de la factura.
+     *
+     * @return Código en formato "FAC-XXXX".
+     */
     public String getCodigoFactura() {
         return codigoFactura;
     }
 
+    /**
+     * Devuelve la fecha y hora en la que se emitió la factura.
+     *
+     * @return Fecha de emisión como LocalDateTime.
+     */
     public LocalDateTime getFechaEmision() {
         return fechaEmision;
     }
 
     /**
-     * Devuelve la base imponible (suma de precios base tras descuentos de producto,
+     * Devuelve el total base (la suma de precios base tras descuentos de producto,
      * antes de IVA y envío).
      *
      * @return Total neto en euros.
@@ -100,6 +110,11 @@ public class Factura {
         return totalEnvio;
     }
 
+    /**
+     * Devuelve el descuento de fidelidad o estado VIP aplicado al cliente.
+     *
+     * @return Descuento, en decimales.
+     */
     public double getDescuentoAplicado() {
         return descuentoAplicado;
     }
