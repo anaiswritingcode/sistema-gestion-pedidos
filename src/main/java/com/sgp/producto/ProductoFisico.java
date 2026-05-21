@@ -95,10 +95,12 @@ public class ProductoFisico extends Producto {
     };
   }
 
-  // Sobreescribe el de Producto para calcular con los atributos específicos:
+  /*
+   ** Sobreescribe el de Producto, pero aquí el envío es siempre contextual
+   ** (por el país del cliente), así que simplemente se devuelve el precio.
+   */
   @Override
   public double calcularPrecioFinal() {
-    double precioTotal = getPrecio() + calcularCosteEnvio(this.zonaDestino);
-    return Math.round(precioTotal * 100.0) / 100.0;
+    return getPrecio();
   }
 }

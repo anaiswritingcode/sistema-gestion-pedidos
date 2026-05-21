@@ -132,11 +132,9 @@ public class Pedido {
             if (p == null)
                 continue;
 
-            double precioPorUnidad;
+            double precioPorUnidad = p.calcularPrecioFinal();
             if (p instanceof ProductoFisico pf) {
-                precioPorUnidad = pf.getPrecio() + pf.calcularCosteEnvio(cliente.getPais());
-            } else {
-                precioPorUnidad = p.calcularPrecioFinal();
+                precioPorUnidad += pf.calcularCosteEnvio(cliente.getPais());
             }
 
             total += precioPorUnidad * cantidad;
@@ -161,14 +159,11 @@ public class Pedido {
                 continue;
 
             /*
-             ** Precio base + envío según país del cliente para productos físicos,
-             ** precio con IVA y descuento para productos digitales:
+             ** Precio base + envío según país del cliente para productos físicos.
              */
-            double precioPorUnidad;
-            if (p instanceof ProductoFisico pf) { // Si el producto es (es una instancia de) un ProductoFísico.
-                precioPorUnidad = pf.getPrecio() + pf.calcularCosteEnvio(cliente.getPais());
-            } else {
-                precioPorUnidad = p.calcularPrecioFinal();
+            double precioPorUnidad = p.calcularPrecioFinal();
+            if (p instanceof ProductoFisico pf) { // Si es un producto físico.
+                precioPorUnidad += pf.calcularCosteEnvio(cliente.getPais());
             }
 
             double subtotal = precioPorUnidad * cantidad;
