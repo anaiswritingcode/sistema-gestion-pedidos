@@ -80,7 +80,7 @@ public class ProductoDigital extends Producto {
    * 
    * @param tipoIva IVA a asignar: general (21%), reducido (10%) o súper (4%).
    */
-  public void aplicarIva(String tipoIva) {
+  public void aplicarIVA(String tipoIva) {
     if (tipoIva.equalsIgnoreCase("SÚPER"))
       tipoIva = "SUPER";
 

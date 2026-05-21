@@ -17,7 +17,7 @@ class ProductoDigitalTest {
 
     ProductoDigital producto = new ProductoDigital("Calendario 2026", precio, 12.00, "Todos los derechos reservados");
 
-    producto.aplicarIva(ivaEsperado);
+    producto.aplicarIVA(ivaEsperado);
 
     // Verificamos que el IVA se haya asignado correctamente:
 
@@ -42,7 +42,7 @@ class ProductoDigitalTest {
 
     ProductoDigital producto = new ProductoDigital("Producto 1", precio, 0.5, "Todos los derechos reservados");
 
-    producto.aplicarIva(iva);
+    producto.aplicarIVA(iva);
     producto.asignarDescuento(descuento);
 
     // Verificamos que el precio final salga 49€:

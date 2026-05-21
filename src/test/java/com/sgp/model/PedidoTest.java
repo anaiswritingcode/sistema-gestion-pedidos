@@ -31,7 +31,7 @@ class PedidoTest {
     ProductoDigital productoDigital = new ProductoDigital("Producto 2", precioProductoDigital, 1.0,
         "Todos los derechos reservados");
 
-    productoDigital.aplicarIva(iva);
+    productoDigital.aplicarIVA(iva);
     productoDigital.asignarDescuento(descuento);
 
     // Pedido en el que meterlos, junto a un cliente de prueba asociado:
@@ -122,10 +122,10 @@ class PedidoTest {
     // Datos de prueba:
 
     ProductoDigital producto1 = new ProductoDigital("Producto 1", 5.0, 0.1, "Todos los derechos reservados");
-    producto1.aplicarIva("REDUCIDO");
+    producto1.aplicarIVA("REDUCIDO");
 
     ProductoDigital producto2 = new ProductoDigital("Producto 2", 6.0, 1.0, "Todos los derechos reservados");
-    producto2.aplicarIva("REDUCIDO");
+    producto2.aplicarIVA("REDUCIDO");
     producto2.asignarDescuento(0.15);
 
     Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
