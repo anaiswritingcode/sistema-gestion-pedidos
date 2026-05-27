@@ -1,12 +1,7 @@
 package com.sgp.service;
 
-import java.util.Map;
-
 import com.sgp.model.Cliente;
 import com.sgp.model.Pedido;
-import com.sgp.producto.Producto;
-import com.sgp.producto.ProductoDigital;
-import com.sgp.producto.ProductoFisico;
 
 public class Tienda {
 
@@ -38,35 +33,9 @@ public class Tienda {
             throw new IllegalArgumentException("El pedido no puede estar vacío.");
         }
 
-        double totalNeto = 0.0;
-        double totalIva = 0.0;
-        double totalEnvio = 0.0;
-
-        /*
-         ** Acumula el precio neto, el IVA y coste de envío por cada producto del pedido
-         ** según su tipo y cantidad:
-         */
-        for (Map.Entry<Producto, Integer> entry : pedido.getCantidades().entrySet()) {
-            Producto p = entry.getKey();
-            int cantidad = entry.getValue();
-
-            switch (p) {
-                case null -> {
-                    // No se hace nada.
-                }
-                case ProductoDigital pd -> {
-                    double baseImponible = pd.getPrecio() * (1.0 - pd.getDescuento());
-                    totalNeto += baseImponible * cantidad;
-                    totalIva += baseImponible * pd.getIva() * cantidad;
-                }
-                case ProductoFisico pf -> {
-                    totalNeto += pf.getPrecio() * cantidad;
-                    totalEnvio += pf.calcularCosteEnvio(cliente.getPais()) * cantidad;
-                }
-                default -> totalNeto += p.getPrecio() * cantidad;
-            }
-        }
-
+        double totalNeto = pedido.calcularTotalNeto();
+        double totalIva = pedido.calcularTotalIva();
+        double totalEnvio = pedido.calcularTotalEnvio();
         double descuento = calcularDescuentoCliente(cliente);
         return new Factura(totalNeto, totalIva, totalEnvio, descuento);
     }
