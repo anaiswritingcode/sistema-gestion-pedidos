@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sgp.producto.Producto;
+import com.sgp.producto.ProductoDigital;
 import com.sgp.producto.ProductoFisico;
 
 public class Pedido {
@@ -65,6 +66,12 @@ public class Pedido {
         }
     }
 
+    private void validarNoVacio() {
+        if (cantidades.isEmpty()) {
+            throw new IllegalStateException("La lista de productos no puede estar vacía.");
+        }
+    }
+
     /**
      * Para añadir productos a la lista de forma controlada.
      *
@@ -91,6 +98,7 @@ public class Pedido {
      * @param producto Producto a eliminar.
      */
     public void eliminarProducto(Producto producto) {
+
         if (producto == null) {
             throw new IllegalArgumentException("El producto no puede ser null.");
         }
@@ -108,50 +116,109 @@ public class Pedido {
     }
 
     /**
-     * Calcula el precio total del pedido sumando el precio final de cada producto
-     * (con IVA para productos digitales y con coste de envío del país del cliente
-     * para productos físicos) multiplicado por su cantidad.
+     * Suma de precios base tras descuentos de producto, sin IVA ni envío.
      *
-     * @return Precio total sin descuentos de cliente.
+     * @return Total neto en euros.
      */
-    public double calcularTotal() {
-        if (cantidades.isEmpty()) {
-            throw new IllegalStateException("La lista de productos no puede estar vacía.");
-        }
+    public double calcularTotalNeto() {
+
+        validarNoVacio();
 
         double total = 0.0;
 
-        /*
-         ** Sumar el precio por unidad de cada producto (con envío o IVA según tipo)
-         ** multiplicado por su cantidad:
-         */
         for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+
             Producto p = entry.getKey();
-            int cantidad = entry.getValue();
 
-            if (p == null)
+            if (p == null) {
                 continue;
-
-            double precioPorUnidad = p.calcularPrecioFinal();
-            if (p instanceof ProductoFisico pf) {
-                precioPorUnidad += pf.calcularCosteEnvio(cliente.getPais());
             }
 
-            total += precioPorUnidad * cantidad;
+            int cantidad = entry.getValue();
+            if (p instanceof ProductoDigital pd) { // Si es un ProductoDigital.
+                total += pd.getPrecio() * (1.0 - pd.getDescuento()) * cantidad;
+            } else {
+                total += p.getPrecio() * cantidad;
+            }
         }
 
         return total;
     }
 
+    /**
+     * Importe total de IVA de todos los productos digitales del pedido.
+     *
+     * @return Total IVA en euros.
+     */
+    public double calcularTotalIva() {
+
+        validarNoVacio();
+
+        double total = 0.0;
+
+        for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+
+            Producto p = entry.getKey();
+
+            if (p == null) {
+                continue;
+            }
+
+            int cantidad = entry.getValue();
+            if (p instanceof ProductoDigital pd) { // Si es un ProductoDigital.
+                total += pd.getPrecio() * (1.0 - pd.getDescuento()) * pd.getIva() * cantidad;
+            }
+        }
+
+        return total;
+    }
+
+    /**
+     * Importe total de costes de envío de todos los productos físicos,
+     * calculado según el país del cliente asociado al pedido.
+     *
+     * @return Total envío en euros.
+     */
+    public double calcularTotalEnvio() {
+
+        validarNoVacio();
+
+        double total = 0.0;
+
+        for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+
+            Producto p = entry.getKey();
+
+            if (p == null) {
+                continue;
+            }
+
+            int cantidad = entry.getValue();
+            if (p instanceof ProductoFisico pf) { // Si es un ProductoFisico.
+                total += pf.calcularCosteEnvio(cliente.getPais()) * cantidad;
+            }
+        }
+
+        return total;
+    }
+
+    /**
+     * Calcula el precio total del pedido: suma de neto, IVA y envío de todos
+     * los productos multiplicados por su cantidad. Sin descuentos de cliente.
+     *
+     * @return Precio total sin descuentos de cliente.
+     */
+    public double calcularTotal() {
+        return calcularTotalNeto() + calcularTotalIva() + calcularTotalEnvio();
+    }
+
     public String mostrarResumen() {
+
         StringBuilder resumen = new StringBuilder();
         resumen.append("Productos:\n");
 
-        /*
-         ** Para cada producto calcular su precio por unidad y subtotal
-         ** y añadirlos al resumen:
-         */
         for (Map.Entry<Producto, Integer> entry : cantidades.entrySet()) {
+
             Producto p = entry.getKey();
             int cantidad = entry.getValue();
 
@@ -174,6 +241,7 @@ public class Pedido {
                     .append(" euros.\n");
         }
         resumen.append("Total: ").append(calcularTotal()).append(" euros.");
+
         return resumen.toString();
     }
 }
