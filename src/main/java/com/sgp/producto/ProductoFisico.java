@@ -4,9 +4,9 @@ public class ProductoFisico extends Producto {
 
   private double peso;
   private String zonaDestino;
-  private final String espanaInterrogacion = "ESPA?A";
-  private final String espanaPlano = "ESPANA";
-  private final String espanaConSimboloEspecial = "ESPAÑA";
+  private static final String ESPANA_INTERROGACION = "ESPA?A";
+  private static final String ESPANA_PLANO = "ESPANA";
+  private static final String ESPANA_CON_SIMBOLO_ESPECIAL = "ESPAÑA";
 
   // * CONSTRUCTOR:
 
@@ -22,9 +22,9 @@ public class ProductoFisico extends Producto {
     // Validación interna de 'zonaDestino':
     if (zonaDestino == null || zonaDestino.isEmpty()) {
       throw new IllegalArgumentException("La zona de destino no puede estar vacía.");
-    } else if (zonaDestino.equalsIgnoreCase(espanaConSimboloEspecial)
-        || zonaDestino.equalsIgnoreCase(espanaInterrogacion)) {
-      zonaDestino = espanaPlano;
+    } else if (zonaDestino.equalsIgnoreCase(ESPANA_CON_SIMBOLO_ESPECIAL)
+        || zonaDestino.equalsIgnoreCase(ESPANA_INTERROGACION)) {
+      zonaDestino = ESPANA_PLANO;
     }
 
     // Asignación de variables:
@@ -39,8 +39,8 @@ public class ProductoFisico extends Producto {
   }
 
   public String getZonaDestino() {
-    if (this.zonaDestino.equalsIgnoreCase(espanaPlano)) {
-      return espanaConSimboloEspecial;
+    if (this.zonaDestino.equalsIgnoreCase(ESPANA_PLANO)) {
+      return ESPANA_CON_SIMBOLO_ESPECIAL;
     } else {
       return zonaDestino.toUpperCase();
     }
@@ -68,9 +68,9 @@ public class ProductoFisico extends Producto {
   public void setZonaDestino(String nuevaZonaDestino) {
     if (nuevaZonaDestino == null || nuevaZonaDestino.isEmpty()) {
       throw new IllegalArgumentException("La zona de destino no puede estar vacía.");
-    } else if (nuevaZonaDestino.equalsIgnoreCase(espanaConSimboloEspecial)
-        || nuevaZonaDestino.equalsIgnoreCase(espanaInterrogacion)) {
-      this.zonaDestino = espanaPlano;
+    } else if (nuevaZonaDestino.equalsIgnoreCase(ESPANA_CON_SIMBOLO_ESPECIAL)
+        || nuevaZonaDestino.equalsIgnoreCase(ESPANA_INTERROGACION)) {
+      this.zonaDestino = ESPANA_PLANO;
     } else {
       this.zonaDestino = nuevaZonaDestino.toUpperCase();
     }
@@ -91,11 +91,11 @@ public class ProductoFisico extends Producto {
     }
 
     String paisNormalizado = pais.trim().toUpperCase()
-        .replace(espanaConSimboloEspecial, espanaPlano)
-        .replace(espanaInterrogacion, espanaPlano);
+        .replace(ESPANA_CON_SIMBOLO_ESPECIAL, ESPANA_PLANO)
+        .replace(ESPANA_INTERROGACION, ESPANA_PLANO);
 
     return switch (paisNormalizado) {
-      case espanaPlano -> 0.0;
+      case ESPANA_PLANO -> 0.0;
       case "FRANCIA", "ITALIA", "PORTUGAL" -> 5.0;
       default -> 10.0;
     };
