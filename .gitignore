@@ -4,3 +4,9 @@ target/
 logs/
 *.log
 *.class
+
+# SonarQube
+.sonar/
+.scannerwork/
+sonarqube_data/
+sonar-project.properties
