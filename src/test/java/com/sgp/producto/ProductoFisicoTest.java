@@ -1,7 +1,7 @@
 package com.sgp.producto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +26,8 @@ class ProductoFisicoTest {
 
     // Verificamos que el total con ese coste de envío no salga ni 61€ ni 59€:
 
-    assertFalse(precioFinalTotal == 61.0, "El precio final total no debería salir 61€");
-    assertFalse(precioFinalTotal == 59.0, "El precio final total no debería salir 59€");
+    assertNotEquals(61.0, precioFinalTotal, "El precio final total no debería salir 61€");
+    assertNotEquals(59.0, precioFinalTotal, "El precio final total no debería salir 59€");
   }
 
   @Test
