@@ -1,8 +1,12 @@
 package com.sgp.producto;
 
 public class ProductoFisico extends Producto {
+
   private double peso;
   private String zonaDestino;
+  private final String espanaInterrogacion = "ESPA?A";
+  private final String espanaPlano = "ESPANA";
+  private final String espanaConSimboloEspecial = "ESPAÑA";
 
   // * CONSTRUCTOR:
 
@@ -18,8 +22,9 @@ public class ProductoFisico extends Producto {
     // Validación interna de 'zonaDestino':
     if (zonaDestino == null || zonaDestino.isEmpty()) {
       throw new IllegalArgumentException("La zona de destino no puede estar vacía.");
-    } else if (zonaDestino.equalsIgnoreCase("ESPAÑA") || zonaDestino.equalsIgnoreCase("ESPA?A")) {
-      zonaDestino = "ESPANA";
+    } else if (zonaDestino.equalsIgnoreCase(espanaConSimboloEspecial)
+        || zonaDestino.equalsIgnoreCase(espanaInterrogacion)) {
+      zonaDestino = espanaPlano;
     }
 
     // Asignación de variables:
@@ -34,8 +39,8 @@ public class ProductoFisico extends Producto {
   }
 
   public String getZonaDestino() {
-    if (this.zonaDestino.equalsIgnoreCase("ESPANA")) {
-      return "ESPAÑA";
+    if (this.zonaDestino.equalsIgnoreCase(espanaPlano)) {
+      return espanaConSimboloEspecial;
     } else {
       return zonaDestino.toUpperCase();
     }
@@ -63,8 +68,9 @@ public class ProductoFisico extends Producto {
   public void setZonaDestino(String nuevaZonaDestino) {
     if (nuevaZonaDestino == null || nuevaZonaDestino.isEmpty()) {
       throw new IllegalArgumentException("La zona de destino no puede estar vacía.");
-    } else if (nuevaZonaDestino.equalsIgnoreCase("ESPAÑA") || nuevaZonaDestino.equalsIgnoreCase("ESPA?A")) {
-      this.zonaDestino = "ESPANA";
+    } else if (nuevaZonaDestino.equalsIgnoreCase(espanaConSimboloEspecial)
+        || nuevaZonaDestino.equalsIgnoreCase(espanaInterrogacion)) {
+      this.zonaDestino = espanaPlano;
     } else {
       this.zonaDestino = nuevaZonaDestino.toUpperCase();
     }
@@ -85,11 +91,11 @@ public class ProductoFisico extends Producto {
     }
 
     String paisNormalizado = pais.trim().toUpperCase()
-        .replace("ESPAÑA", "ESPANA")
-        .replace("ESPA?A", "ESPANA");
+        .replace(espanaConSimboloEspecial, espanaPlano)
+        .replace(espanaInterrogacion, espanaPlano);
 
     return switch (paisNormalizado) {
-      case "ESPANA" -> 0.0;
+      case espanaPlano -> 0.0;
       case "FRANCIA", "ITALIA", "PORTUGAL" -> 5.0;
       default -> 10.0;
     };
