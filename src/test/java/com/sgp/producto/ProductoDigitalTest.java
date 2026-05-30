@@ -51,6 +51,38 @@ class ProductoDigitalTest {
   }
 
   @Test
+  void testCalculoIvaSuper() { // * CP-12
+
+    String iva = "SUPER";
+    double ivaEsperado = 0.04;
+
+    // Producto digital de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Producto 1", 10.0, 1.0, "Todos los derechos reservados");
+
+    // Verificamos que el IVA salga 0.04:
+
+    producto.aplicarIVA(iva);
+    assertEquals(ivaEsperado, producto.getIva(), "El IVA de tipo SUPER tendría que haber salido '0.04'");
+  }
+
+  @Test
+  void testCalculoIvaipoInvalido() { // * CP-13
+
+    String iva = "INVENTADO";
+
+    // Producto digital de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Producto 1", 5.0, 2.5, "Todos los derechos reservados");
+
+    // Verificamos que se devuelva una excepción:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> producto.aplicarIVA(iva),
+        "Tendría que haber saltado una IllegalArgumentException por un tipo de IVA inválido.");
+  }
+
+  @Test
   void testCreacionProductoDigital() {
 
     double tamannoDescarga = 0.0;
