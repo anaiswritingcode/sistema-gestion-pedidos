@@ -22,7 +22,7 @@ class PedidoTest {
 
   // * CP-09:
   void testCalcularTotal(double precioProductoFisico, String zonaDestino,
-      double precioProductoDigital, String iva, double descuento, double totalInvalido, double peso) throws Exception {
+      double precioProductoDigital, String iva, double descuento, double totalInvalido, double peso) {
 
     // Productos de prueba:
 
@@ -62,10 +62,7 @@ class PedidoTest {
      ** de un pedido sin productos:
      */
 
-    assertThrows(IllegalStateException.class,
-        () -> {
-          pedido.calcularTotal();
-        },
+    assertThrows(IllegalStateException.class, pedido::calcularTotal,
         "Tendría que haber saltado una IllegalStateException al calcular el total de un pedido vacío.");
   }
 
@@ -97,7 +94,7 @@ class PedidoTest {
   }
 
   @Test
-  void testPedidoTresEuros() throws Exception { // * CP-02
+  void testPedidoTresEuros() { // * CP-02
 
     // Datos de prueba:
 
@@ -136,7 +133,7 @@ class PedidoTest {
   }
 
   @Test
-  void testTotalDosProductos() throws Exception { // * CP-06
+  void testTotalDosProductos() { // * CP-06
 
     // Datos de prueba:
 
