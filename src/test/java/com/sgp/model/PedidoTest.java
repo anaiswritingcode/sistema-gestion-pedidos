@@ -51,6 +51,26 @@ class PedidoTest {
   }
 
   @Test
+  void testExcepcionPedidoSinProductos() {
+
+    // Cliente y pedido de prueba:
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+    Pedido pedido = new Pedido(cliente);
+
+    /*
+     ** Verificamos que salta una excepción al calcular el total
+     ** de un pedido sin productos:
+     */
+
+    assertThrows(IllegalStateException.class,
+        () -> {
+          pedido.calcularTotal();
+        },
+        "Tendría que haber saltado una IllegalStateException al calcular el total de un pedido vacío.");
+  }
+
+  @Test
   void testExcepcionPedidoSinCliente() { // * CP-11
 
     // Verificamos que salta una excepción al crear un pedido sin cliente asociado:
