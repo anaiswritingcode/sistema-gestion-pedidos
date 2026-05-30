@@ -2,7 +2,6 @@ package com.sgp.producto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class ProductoDigitalTest {
@@ -21,14 +20,14 @@ class ProductoDigitalTest {
 
     // Verificamos que el IVA se haya asignado correctamente:
 
-    assertTrue(producto.getIva() == 0.21, "El IVA tendría que haber salido '0.21'");
+    assertEquals(0.21, producto.getIva(), "El IVA tendría que haber salido '0.21'");
 
     // Vemos si también funciona metido en el precio final:
 
     double precioFinal = producto.calcularPrecioFinal();
     double precioFinalEsperado = Math.round(precio * (1 + 0.21) * 100.0) / 100.0;
 
-    assertTrue(precioFinal == precioFinalEsperado, "El precio final tendría que haber salido '6.05'");
+    assertEquals(precioFinalEsperado, precioFinal, "El precio final tendría que haber salido '6.05'");
   }
 
   @Test
