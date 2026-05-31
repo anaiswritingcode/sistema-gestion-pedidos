@@ -1,6 +1,7 @@
 package com.sgp.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -177,5 +178,157 @@ class PedidoTest {
         .filter(p -> p.getNombre().equals("Producto"))
         .count(),
         "No debería salir el producto duplicado en la lista del pedido");
+  }
+
+  @Test
+  void testEliminarProductoReduceYElimina() {
+
+    // Datos de prueba:
+
+    ProductoFisico producto = new ProductoFisico("Camiseta", 15.0, 0.3, "ESPAÑA");
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto, 2);
+
+    // Probamos a eliminar una unidad:
+
+    pedido.eliminarProducto(producto);
+    assertEquals(1, pedido.getCantidades().get(producto),
+        "Tras eliminar una unidad debería quedar una más en el pedido.");
+
+    // Probamos a eliminar la última unidad:
+
+    pedido.eliminarProducto(producto);
+    assertFalse(pedido.getProductos().contains(producto),
+        "Tras eliminar la última unidad el producto no debería estar en el pedido.");
+  }
+
+  @Test
+  void testExcepcionEliminarProductoInvalido() {
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+    Pedido pedido = new Pedido(cliente);
+
+    ProductoFisico productoExterno = new ProductoFisico("Producto", 5.0, 1.0, "ESPAÑA");
+    pedido.agregarProducto(productoExterno, 1);
+
+    // Verificamos que eliminar null lanza una excepción:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> pedido.eliminarProducto(null),
+        "Tendría que haber saltado una IllegalArgumentException al eliminar un producto null.");
+
+    // Verificamos que eliminar un producto que no está lanza una excepción:
+
+    ProductoFisico productoAusente = new ProductoFisico("Producto", 8.0, 0.5, "ESPAÑA");
+    assertThrows(IllegalArgumentException.class,
+        () -> pedido.eliminarProducto(productoAusente),
+        "Tendría que haber saltado una IllegalArgumentException al eliminar un producto no presente.");
+  }
+
+  @Test
+  void testAgregarMismoProductoAcumulaUnidades() {
+
+    // Datos de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Ebook", 10.0, 1.0, "N/A");
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto, 2);
+    pedido.agregarProducto(producto, 3);
+
+    // Verificamos que las unidades se acumulan en la misma entrada del mapa:
+
+    assertEquals(5, pedido.getCantidades().get(producto),
+        "Agregar el mismo producto dos veces debería acumular las unidades");
+
+    // Probamos que al agregar con unidades <= 0 se lanza una excepción:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> pedido.agregarProducto(producto, 0),
+        "Tendría que haber saltado una IllegalArgumentException al agregar con 0 unidades");
+  }
+
+  @Test
+  void testGetClienteAsociado() {
+
+    // Datos de prueba:
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+    Pedido pedido = new Pedido(cliente);
+
+    // Verificamos que getCliente() devuelve el cliente correcto y el ID es válido:
+
+    assertEquals(cliente, pedido.getCliente(),
+        "El cliente asociado al pedido debería coincidir con el cliente creado.");
+    assertTrue(pedido.getIdPedido() >= 0,
+        "El ID del pedido debería ser un número no negativo.");
+  }
+
+  @Test
+  void testAgregarProductoNullLanzaExcepcion() {
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+    Pedido pedido = new Pedido(cliente);
+
+    // Verificamos que agregar un producto null lanza una excepción:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> pedido.agregarProducto(null, 1),
+        "Tendría que haber saltado una IllegalArgumentException al agregar un producto null.");
+  }
+
+  @Test
+  void testCalcularTotalNeto() {
+
+    ProductoDigital producto = new ProductoDigital("Libro", 20.0, 1.0, "N/A");
+    producto.asignarDescuento(0.25);
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto, 1);
+
+    // Verificamos que el total neto es 15€ (sin IVA):
+
+    assertEquals(15.0, pedido.calcularTotalNeto(),
+        "El total neto de un producto de 20€ con un 25% de descuento debería ser 15€");
+  }
+
+  @Test
+  void testCalcularTotalIvaConIvaGeneral() {
+
+    ProductoDigital producto = new ProductoDigital("Software", 10.0, 1.0, "MIT");
+    producto.aplicarIVA("GENERAL");
+
+    Cliente cliente = new Cliente("Alfonso G.D.", "alfonso_gd@mail.com", 1, false, "ESPAÑA");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto, 1);
+
+    // Verificamos que el total de IVA es 2.10€:
+
+    assertEquals(2.1, pedido.calcularTotalIva(), 0.001,
+        "El total de IVA de un producto de 10€ con IVA general (21%) debería ser 2.10€");
+  }
+
+  @Test
+  void testCalcularTotalEnvioClienteExtranjero() {
+
+    ProductoFisico producto = new ProductoFisico("Silla", 50.0, 5.0, "ESPAÑA");
+
+    Cliente cliente = new Cliente("Jean Dupont", "jean@mail.com", 1, false, "PORTUGAL");
+
+    Pedido pedido = new Pedido(cliente);
+    pedido.agregarProducto(producto, 2);
+
+    // Verificamos que el coste de envío total es 10€:
+
+    assertEquals(10.0, pedido.calcularTotalEnvio(),
+        "El total de envío para 2 unidades con cliente de PORTUGAL debería ser 10€");
   }
 }
