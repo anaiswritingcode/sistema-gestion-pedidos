@@ -51,7 +51,7 @@ class PedidoTest {
   }
 
   @Test
-  void testExcepcionPedidoSinProductos() {
+  void testExcepcionPedidoSinProductos() { // * CP-14
 
     // Cliente y pedido de prueba:
 
