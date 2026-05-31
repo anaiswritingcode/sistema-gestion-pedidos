@@ -3,6 +3,8 @@ package com.sgp.producto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ProductoDigitalTest {
 
@@ -100,5 +102,63 @@ class ProductoDigitalTest {
     assertThrows(IllegalArgumentException.class,
         () -> new ProductoDigital("Producto", 8.5, 1.0, licencia2),
         "Tendría que haber saltado una IllegalArgumentException al crear un producto digital con licencia inválida.");
+  }
+
+  @Test
+  void testCalculoIvaReducido() {
+
+    String iva = "REDUCIDO";
+    double ivaEsperado = 0.10;
+    double precio = 20.0;
+
+    // Producto digital de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Producto 1", precio, 1.0, "Todos los derechos reservados");
+    producto.aplicarIVA(iva);
+
+    // Verificamos los IVAs reducidos:
+
+    assertEquals(ivaEsperado, producto.getIva(), "El IVA de tipo REDUCIDO tendría que haber salido '0.10'");
+
+    double precioFinalEsperado = Math.round(precio * (1 + ivaEsperado) * 100.0) / 100.0;
+    assertEquals(precioFinalEsperado, producto.calcularPrecioFinal(),
+        "El precio final con IVA reducido no es el esperado.");
+  }
+
+  @ParameterizedTest
+  @ValueSource(doubles = { -0.5, 1.1 })
+  void testDescuentoFueraDeRango(double descuentoInvalido) {
+
+    // Producto digital de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Producto 1", 10.0, 1.0, "Todos los derechos reservados");
+
+    // Probamos descuentos inválidos:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> producto.asignarDescuento(descuentoInvalido),
+        "Tendría que haber saltado una IllegalArgumentException por un descuento fuera del rango [0, 1]");
+  }
+
+  @Test
+  void testSettersInvalidos() {
+
+    // Producto digital de prueba:
+
+    ProductoDigital producto = new ProductoDigital("Producto 1", 10.0, 1.0, "Todos los derechos reservados");
+
+    // Probamos a meter datos inválidos en los setters:
+
+    assertThrows(IllegalArgumentException.class,
+        () -> producto.setTamannoDescarga(0),
+        "Tendría que haber saltado una IllegalArgumentException por tamaño de descarga <= 0");
+
+    assertThrows(IllegalArgumentException.class,
+        () -> producto.setLicencia(null),
+        "Tendría que haber saltado una IllegalArgumentException por licencia nula.");
+
+    assertThrows(IllegalArgumentException.class,
+        () -> producto.setLicencia(""),
+        "Tendría que haber saltado una IllegalArgumentException por licencia vacía.");
   }
 }

@@ -1,6 +1,8 @@
 package com.sgp.producto;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 class ProductoTest {
@@ -48,5 +50,39 @@ class ProductoTest {
         assertThrows(IllegalArgumentException.class,
                 () -> producto.setPrecioBase(-1),
                 "Tendría que haber saltado una IllegalArgumentException al establecer un nuevo precio inválido.");
+    }
+
+    @Test
+    void testGettersProductoBase() {
+        ProductoDigital producto = new ProductoDigital("Curso Java", 49.99, 1.0, "Todos los derechos reservados");
+
+        // Verificamos el funcionamiento de los getters:
+
+        assertEquals("Curso Java", producto.getNombre());
+        assertEquals(49.99, producto.getPrecio());
+    }
+
+    @Test
+    void testSettersValidos() {
+        ProductoFisico producto = new ProductoFisico("Teclado", 80.0, 0.5, "ESPAÑA");
+
+        producto.setNombre("Teclado Mecánico");
+        producto.setPrecioBase(95.0);
+
+        // Verificamos el funcionamiento de setters válidos:
+
+        assertEquals("Teclado Mecánico", producto.getNombre());
+        assertEquals(95.0, producto.getPrecio());
+    }
+
+    @Test
+    void testToStringProductoBase() {
+        ProductoFisico producto = new ProductoFisico("Ratón", 25.0, 0.2, "ESPAÑA");
+        String resultado = producto.toString();
+
+        // Verificamos el funcionamiento del toString():
+
+        assertTrue(resultado.contains("Ratón"), "toString() debería contener el nombre del producto.");
+        assertTrue(resultado.contains("25"), "toString() debería contener el precio del producto.");
     }
 }
