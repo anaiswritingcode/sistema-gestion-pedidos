@@ -84,7 +84,7 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testVentaClienteVipYFidelidadAcumulados() { // * CP-18
+    void testVentaClienteVipYFidelidadAcumulados() { // * CP-18 (REGRESIÓN)
 
         Cliente clienteVipFiel = new Cliente("Carla CS", "carla_cs@mail.com", 5, true, "ESPAÑA");
 
@@ -125,14 +125,14 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testVentaClienteNullLanzaExcepcion() { // * CP-20 (robustez)
+    void testVentaClienteNullLanzaExcepcion() { // * CP-20 (REGRESIÓN)
 
         Cliente cliente = new Cliente("Test", "test@mail.com", 0, false, "ESPAÑA");
 
         Pedido pedido = new Pedido(cliente);
         pedido.agregarProducto(producto, 1);
 
-        // REGRESIÓN: verificamos que salta una excepción con un cliente null:
+        // Verificamos que salta una excepción con un cliente null:
 
         assertThrows(IllegalArgumentException.class,
                 () -> tienda.realizarVenta(null, pedido),
@@ -140,11 +140,11 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testVentaPedidoNullLanzaExcepcion() { // * CP-21 (robustez)
+    void testVentaPedidoNullLanzaExcepcion() { // * CP-21 (REGRESIÓN)
 
         Cliente cliente = new Cliente("Test", "test@mail.com", 0, false, "ESPAÑA");
 
-        // REGRESIÓN: verificamos que salta una excepción con un pedido null:
+        // Verificamos que salta una excepción con un pedido null:
 
         assertThrows(IllegalArgumentException.class,
                 () -> tienda.realizarVenta(cliente, null),
@@ -152,13 +152,13 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testVentaPedidoVacioLanzaExcepcion() { // * CP-22 (robustez)
+    void testVentaPedidoVacioLanzaExcepcion() { // * CP-22 (REGRESIÓN)
 
         Cliente cliente = new Cliente("Test", "test@mail.com", 0, false, "ESPAÑA");
         Pedido pedidoVacio = new Pedido(cliente);
 
         /*
-         ** REGRESIÓN: Tienda debe rechazar pedidos vacíos
+         ** Tienda debe rechazar pedidos vacíos
          ** antes de llegar a Pedido.calcularTotalNeto():
          */
 
@@ -168,10 +168,10 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testCalcularDescuentoClienteNullLanzaExcepcion() { // * CP-23 (robustez)
+    void testCalcularDescuentoClienteNullLanzaExcepcion() { // * CP-23 (REGRESIÓN)
 
         /*
-         ** REGRESIÓN: verificamos que salta una excepción al calcular
+         ** Verificamos que salta una excepción al calcular
          ** el descuento de un cliente null:
          */
 
@@ -181,7 +181,7 @@ class TiendaIntegrationTest {
     }
 
     @Test
-    void testTotalFinalClienteVipEsDiferenteAlSubtotalBruto() { // * CP-24
+    void testTotalFinalClienteVipEsDiferenteAlSubtotalBruto() { // * CP-24 (REGRESIÓN)
 
         Cliente clienteVip = new Cliente("Vip Test", "vip_test@mail.com", 0, true, "ESPAÑA");
         Pedido pedido = new Pedido(clienteVip);

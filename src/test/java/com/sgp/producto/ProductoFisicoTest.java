@@ -53,7 +53,7 @@ class ProductoFisicoTest {
   }
 
   @Test
-  void testCalcularCosteEnvioItaliayPortugal() {
+  void testCalcularCosteEnvioItaliayPortugal() { // * (REGRESIÓN)
 
     ProductoFisico producto = new ProductoFisico("Producto", 5.0, 5.0, "ESPAÑA");
 
@@ -112,7 +112,7 @@ class ProductoFisicoTest {
   }
 
   @Test
-  void testGetZonaDestino() {
+  void testGetZonaDestino() { // * (REGRESIÓN)
 
     ProductoFisico productoEspana = new ProductoFisico("Producto", 5.0, 5.0, "ESPAÑA");
     ProductoFisico productoFrancia = new ProductoFisico("Producto", 5.0, 5.0, "FRANCIA");

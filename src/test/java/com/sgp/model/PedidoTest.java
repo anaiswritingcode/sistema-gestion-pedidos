@@ -116,7 +116,7 @@ class PedidoTest {
   }
 
   @Test
-  void testCaracterEspecial() { // * CP-05
+  void testCaracterEspecial() { // * CP-05 (REGRESIÓN)
 
     // Datos de prueba:
 
@@ -161,7 +161,7 @@ class PedidoTest {
   }
 
   @Test
-  void testProductoDuplicado() { // * CP-08
+  void testProductoDuplicado() { // * CP-08 (REGRESIÓN)
 
     // Datos de prueba:
 
@@ -181,7 +181,7 @@ class PedidoTest {
   }
 
   @Test
-  void testEliminarProductoReduceYElimina() {
+  void testEliminarProductoReduceYElimina() { // * (REGRESIÓN)
 
     // Datos de prueba:
 
@@ -229,7 +229,7 @@ class PedidoTest {
   }
 
   @Test
-  void testAgregarMismoProductoAcumulaUnidades() {
+  void testAgregarMismoProductoAcumulaUnidades() { // * (REGRESIÓN)
 
     // Datos de prueba:
 
